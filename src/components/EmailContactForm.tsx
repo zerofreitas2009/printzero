@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { type FormEvent, useMemo, useState } from "react";
 import { supabase } from "../integrations/supabase/client";
 
 type Kind = "assistencia" | "orcamento";
@@ -35,7 +35,7 @@ export default function EmailContactForm({
     );
   }, [email, loading, message, name, phone, subject]);
 
-  async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
 
