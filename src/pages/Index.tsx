@@ -131,8 +131,8 @@ export default function Index() {
                   <div className="text-xs text-white/60">UI moderna • clean</div>
                 </div>
                 <img
-                  src="/assets/printzero-2.png"
-                  alt="Sugestão visual para a página principal"
+                  src="/assets/desenhos-home.png"
+                  alt="Desenhos e referência visual da página principal"
                   className="w-full rounded-xl border border-white/10"
                   loading="lazy"
                 />

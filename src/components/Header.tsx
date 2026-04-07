@@ -45,14 +45,14 @@ export default function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-3">
           <img
-            src="/assets/printzero-3.png"
+            src="/assets/logomarca1.png"
             alt="PrintZero"
             className="h-9 w-auto rounded-md"
             loading="eager"
           />
           <div className="hidden sm:block">
             <div className="text-sm font-semibold tracking-wide">PrintZero</div>
-            <div className="text-xs text-white/70">Tecnologia & Serviços</div>
+            <div className="text-xs text-white/70">Tecnologia e Serviços</div>
           </div>
         </Link>
 
