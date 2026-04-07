@@ -45,7 +45,7 @@ export default function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-3">
           <img
-            src="/assets/logomarca1.png"
+            src="/assets/logo-oficial.png"
             alt="PrintZero"
             className="h-9 w-auto rounded-md"
             loading="eager"
