@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Gradiente de fundo sutil + textura */
+body {
+  @apply bg-deep text-white antialiased;
+  background-image:
+    radial-gradient(900px 600px at 20% 20%, rgba(0, 116, 217, 0.22), transparent 60%),
+    radial-gradient(900px 600px at 80% 0%, rgba(0, 116, 217, 0.18), transparent 55%),
+    radial-gradient(900px 600px at 60% 90%, rgba(0, 31, 63, 0.6), transparent 55%),
+    linear-gradient(135deg, #001f3f 0%, #003a70 40%, #001f3f 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Animação de entrada (cards/elementos) */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+  transition: opacity 700ms ease, transform 700ms ease, filter 700ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Barra de rolagem (Chrome/Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0, 116, 217, 0.85), rgba(0, 31, 63, 0.95));
+  border-radius: 999px;
+}
