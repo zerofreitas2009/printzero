@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle2, ExternalLink, Smartphone } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import EmailContactForm from "../components/EmailContactForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Reveal from "../components/Reveal";
@@ -415,29 +416,56 @@ export default function Index() {
       <section id="contato" className="scroll-mt-24 py-16" aria-label="Contato">
         <div className="mx-auto max-w-6xl px-4">
           <Reveal>
-            <div className="grid gap-6 rounded-2xl border border-white/10 bg-white/5 p-7 shadow-glow md:grid-cols-2 md:items-center">
-              <div>
+            <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-7 shadow-glow">
                 <h2 className="text-3xl font-semibold tracking-tight">Contato</h2>
                 <p className="mt-2 text-white/70">
-                  Vamos tirar sua ideia do papel com um visual de alto impacto e tecnologia
-                  robusta.
+                  Para orçamento de desenvolvimento (sites/sistemas) ou para adquirir o
+                  sistema de chamados LocalDesk.
                 </p>
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
-                <a
-                  href="mailto:printzeroinfo@gmail.com"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
-                  printzeroinfo@gmail.com
-                </a>
-                <a
-                  href={WHATSAPP}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
-                  WhatsApp
+
+                <div className="mt-5 grid gap-2 text-sm text-white/70">
+                  <div>
+                    Telefone/WhatsApp: <span className="text-white">(11) 97549-5126</span>
+                  </div>
+                  <div>
+                    E-mail: <span className="text-white">zerofreitas2026@gmail.com</span>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href="mailto:zerofreitas2026@gmail.com"
+                    className="inline-flex h-12 items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 text-sm font-semibold text-white transition hover:bg-white/10">
+                    Enviar e-mail
+                  </a>
+                  <a
+                    href={WHATSAPP}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-6 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
+                    Chamar no WhatsApp
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+
+                <div className="mt-6 text-xs text-white/50">
+                  Precisa de conserto de celular? Acesse a página de assistência técnica.
+                </div>
+                <Link
+                  to="/consertos-de-celular"
+                  className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-sky-200 transition hover:text-white">
+                  Ir para Assistência Técnica
                   <ArrowRight className="h-4 w-4" />
-                </a>
+                </Link>
               </div>
+
+              <EmailContactForm
+                kind="orcamento"
+                title="Enviar e-mail — Orçamento (Sites / Sistemas / LocalDesk)"
+                phoneLabel="(11) 97549-5126"
+                toEmailLabel="zerofreitas2026@gmail.com"
+              />
             </div>
           </Reveal>
         </div>

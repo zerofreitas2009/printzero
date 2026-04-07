@@ -1,18 +1,31 @@
 import { MessageCircle } from "lucide-react";
 
-const WHATSAPP_PHONE = "5511975495126";
-const WHATSAPP_TEXT = encodeURIComponent(
-  "Olá! Quero um orçamento para site/sistema ou assistência técnica."
-);
+type Props = {
+  phone?: string;
+  text?: string;
+  className?: string;
+};
 
-export default function WhatsAppFab() {
+export default function WhatsAppFab({
+  phone = "5511975495126",
+  text = "Olá! Quero um orçamento para site/sistema ou assistência técnica.",
+  className,
+}: Props) {
+  const msg = encodeURIComponent(text);
+
   return (
     <a
-      href={`https://wa.me/${WHATSAPP_PHONE}?text=${WHATSAPP_TEXT}`}
+      href={`https://wa.me/${phone}?text=${msg}`}
       target="_blank"
       rel="noreferrer"
       aria-label="Falar no WhatsApp"
-      className="fixed bottom-5 right-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/25 transition hover:scale-[1.03] hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-white/30">
+      className={[
+        "fixed bottom-5 right-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/25 transition hover:scale-[1.03] hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-white/30",
+        className ?? "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <MessageCircle className="h-6 w-6" />
     </a>
   );

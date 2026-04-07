@@ -12,12 +12,13 @@ import {
 } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import EmailContactForm from "../components/EmailContactForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Reveal from "../components/Reveal";
 import WhatsAppFab from "../components/WhatsAppFab";
 
-const WHATSAPP = "https://wa.me/5511975495126";
+const WHATSAPP_ASSISTENCIA = "https://wa.me/5511993891011";
 
 const techServices = [
   {
@@ -65,7 +66,10 @@ export default function ConsertosDeCelular() {
   return (
     <div className="min-h-screen">
       <Header />
-      <WhatsAppFab />
+      <WhatsAppFab
+        phone="5511993891011"
+        text="Olá! Preciso de assistência técnica. Meu modelo é ____ e o problema é ____."
+      />
 
       <main className="pt-24">
         <section className="relative py-12" aria-label="Consertos de Celular">
@@ -100,7 +104,7 @@ export default function ConsertosDeCelular() {
             <Reveal delayMs={200}>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <a
-                  href={WHATSAPP}
+                  href={WHATSAPP_ASSISTENCIA}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
@@ -156,6 +160,37 @@ export default function ConsertosDeCelular() {
           </div>
         </section>
 
+        <section className="pb-14" aria-label="Contato por e-mail">
+          <div className="mx-auto max-w-6xl px-4">
+            <Reveal>
+              <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
+                <EmailContactForm
+                  kind="assistencia"
+                  title="Enviar e-mail — Assistência técnica"
+                  phoneLabel="(11) 99389-1011"
+                  toEmailLabel="printzeroinfo@gmail.com"
+                />
+
+                <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-glow">
+                  <div className="text-lg font-semibold">Dica para agilizar</div>
+                  <p className="mt-2 text-sm text-white/70">
+                    Informe o modelo do aparelho, se caiu/molhou, e quando o problema
+                    começou. Se puder, envie fotos/vídeos no WhatsApp.
+                  </p>
+                  <a
+                    href={WHATSAPP_ASSISTENCIA}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/15">
+                    Chamar no WhatsApp
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
         <section className="pb-16" aria-label="Como funciona">
           <div className="mx-auto max-w-6xl px-4">
             <Reveal>
@@ -179,7 +214,7 @@ export default function ConsertosDeCelular() {
                   )}
                 </div>
                 <a
-                  href={WHATSAPP}
+                  href={WHATSAPP_ASSISTENCIA}
                   target="_blank"
                   rel="noreferrer"
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15">
