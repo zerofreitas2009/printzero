@@ -166,7 +166,7 @@ export default function Index() {
               <Reveal key={s.title} delayMs={idx * 80}>
                 <div className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
                   <div className="flex items-start gap-3">
-                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-royal/20 text-2xl shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]">
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-royal/20 text-[22px] leading-none shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] select-none">
                       {s.emoji}
                     </div>
                     <div>
@@ -205,13 +205,13 @@ export default function Index() {
 
             <Reveal delayMs={260}>
               <div className="h-full rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-glow">
-                <div className="flex items-center gap-3">
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-royal/25 text-sky-200">
+                <div className="flex items-start gap-3">
+                  <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-royal/25 text-sky-200">
                     <Smartphone className="h-5 w-5" />
                   </div>
                   <div>
                     <div className="text-lg font-semibold">
-                      📱 Acessórios & Conserto de Celulares
+                      Acessórios & Conserto de Celulares
                     </div>
                     <div className="text-sm text-white/70">
                       Página exclusiva com lista completa de serviços.
@@ -219,18 +219,18 @@ export default function Index() {
                   </div>
                 </div>
 
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <Link
                     to="/consertos-de-celular"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/15">
+                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 text-sm font-semibold text-white transition hover:bg-white/10">
                     Ver assistência técnica
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 text-white/70" />
                   </Link>
                   <a
                     href={WHATSAPP}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
+                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-5 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
                     Falar no WhatsApp
                     <ArrowRight className="h-4 w-4" />
                   </a>
