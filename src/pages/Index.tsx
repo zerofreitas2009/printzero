@@ -8,18 +8,27 @@ import WhatsAppFab from "../components/WhatsAppFab";
 
 const WHATSAPP = "https://wa.me/5511975495126";
 
-const services = [
+type Service = {
+  emoji: string;
+  title: string;
+  desc: string;
+};
+
+const services: Service[] = [
   {
+    emoji: "🖥️",
     title: "Sites Institucionais & Landing Pages",
-    desc: "Design moderno, rápido e pensado para conversão — com SEO e performance."
+    desc: "Design moderno, rápido e pensado para conversão — com SEO e performance.",
   },
   {
+    emoji: "⚙️",
     title: "Sistemas SaaS Sob Medida",
-    desc: "Pet Shop, Comércio, Indústria, Financeiro, HelpDesk e muito mais."
+    desc: "Pet Shop, Comércio, Indústria, Financeiro, HelpDesk e muito mais.",
   },
   {
+    emoji: "🔗",
     title: "Automação & Integrações",
-    desc: "APIs, relatórios, dashboards e fluxos que reduzem custos e aumentam produtividade."
+    desc: "APIs, relatórios, dashboards e fluxos que reduzem custos e aumentam produtividade.",
   },
 ];
 
@@ -45,10 +54,7 @@ export default function Index() {
       <WhatsAppFab />
 
       {/* HERO */}
-      <section
-        id="inicio"
-        className="relative pt-24"
-        aria-label="Início">
+      <section id="inicio" className="relative pt-24" aria-label="Início">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_70%_20%,rgba(0,116,217,0.26),transparent_60%)]" />
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-deep to-transparent" />
@@ -91,9 +97,7 @@ export default function Index() {
                 </a>
                 <button
                   onClick={() =>
-                    document
-                      .getElementById("servicos")
-                      ?.scrollIntoView({ behavior: "smooth" })
+                    document.getElementById("servicos")?.scrollIntoView({ behavior: "smooth" })
                   }
                   className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/90 transition hover:bg-white/10">
                   Ver serviços
@@ -160,11 +164,19 @@ export default function Index() {
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {services.map((s, idx) => (
               <Reveal key={s.title} delayMs={idx * 80}>
-                <div className="group h-full rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
-                  <div className="text-lg font-semibold">{s.title}</div>
-                  <p className="mt-2 text-sm leading-relaxed text-white/70">
-                    {s.desc}
-                  </p>
+                <div className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
+                  <div className="flex items-start gap-3">
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-royal/20 text-2xl shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]">
+                      {s.emoji}
+                    </div>
+                    <div>
+                      <div className="text-lg font-semibold">{s.title}</div>
+                      <p className="mt-2 text-sm leading-relaxed text-white/70">
+                        {s.desc}
+                      </p>
+                    </div>
+                  </div>
+
                   <div className="mt-5 flex flex-wrap gap-2">
                     {idx === 1
                       ? saasExamples.map((tag) => (
@@ -176,12 +188,14 @@ export default function Index() {
                         ))
                       : null}
                   </div>
+
                   <div className="mt-6 h-px w-full bg-gradient-to-r from-white/0 via-white/15 to-white/0" />
+
                   <a
                     href={WHATSAPP}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-200 transition group-hover:text-white">
+                    className="mt-5 inline-flex w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
                     Solicitar orçamento
                     <ArrowRight className="h-4 w-4" />
                   </a>
@@ -197,7 +211,7 @@ export default function Index() {
                   </div>
                   <div>
                     <div className="text-lg font-semibold">
-                      Acessórios & Conserto de Celulares
+                      📱 Acessórios & Conserto de Celulares
                     </div>
                     <div className="text-sm text-white/70">
                       Página exclusiva com lista completa de serviços.
@@ -247,9 +261,9 @@ export default function Index() {
             <Reveal>
               <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-glow">
                 <div className="border-b border-white/10 bg-white/5 px-5 py-4">
-                  <div className="text-sm font-semibold">Vídeo de apresentação</div>
+                  <div className="text-sm font-semibold">🎬 Vídeo de apresentação</div>
                   <div className="text-xs text-white/60">
-                    Visão geral das soluções e benefícios
+                    Apresentação do LocalDesk (Sistema de Chamados)
                   </div>
                 </div>
                 <div className="aspect-video">
@@ -275,7 +289,7 @@ export default function Index() {
                   className="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <div className="text-lg font-semibold">LocalDesk</div>
+                      <div className="text-lg font-semibold">🎧 LocalDesk</div>
                       <p className="mt-2 text-sm text-white/70">
                         Centralize atendimento e gestão com um HelpDesk moderno.
                       </p>
@@ -297,7 +311,7 @@ export default function Index() {
                   className="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <div className="text-lg font-semibold">BuscaLocal</div>
+                      <div className="text-lg font-semibold">📍 BuscaLocal</div>
                       <p className="mt-2 text-sm text-white/70">
                         Presença digital com foco em descoberta, tráfego e conversão.
                       </p>
@@ -313,7 +327,7 @@ export default function Index() {
 
               <Reveal delayMs={240}>
                 <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-royal/20 to-white/5 p-6">
-                  <div className="text-sm font-semibold">Quer um sistema próprio?</div>
+                  <div className="text-sm font-semibold">✨ Quer um sistema próprio?</div>
                   <p className="mt-2 text-sm text-white/70">
                     Criamos SaaS sob medida com UI moderna, escalabilidade e manutenção.
                   </p>
