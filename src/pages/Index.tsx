@@ -35,13 +35,11 @@ const services: Service[] = [
 
 const saasExamples = ["Pet Shop", "Comércio", "Indústria", "Financeiro", "HelpDesk"];
 
-const clientLogos = [
-  "Empresa Alpha",
-  "Grupo Orion",
-  "Clínica NovaVida",
-  "Boutique Central",
-  "Indústria Horizonte",
-  "Serviços Prime",
+const clientPortfolio = [
+  { name: "RL Consultoria em TI", url: "https://rlcti.com.br/" },
+  { name: "LOHN Advocacia", url: "https://advocacialohn.adv.br/" },
+  { name: "LocalDesk Sistema de Chamados", url: "https://localdesk.buscalocal.net/" },
+  { name: "BuscaLocal Sistemas de Buscas de Negócio", url: "https://buscalocal.net/" },
 ];
 
 export default function Index() {
@@ -359,12 +357,16 @@ export default function Index() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {clientLogos.map((name, idx) => (
-              <Reveal key={name} delayMs={idx * 60}>
-                <div className="flex h-20 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-center text-xs font-semibold text-white/80">
-                  {name}
-                </div>
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {clientPortfolio.map((item, idx) => (
+              <Reveal key={item.url} delayMs={idx * 60}>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex h-20 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 text-center text-xs font-semibold text-white/80 transition hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/10">
+                  <span className="leading-snug">{item.name}</span>
+                </a>
               </Reveal>
             ))}
           </div>
