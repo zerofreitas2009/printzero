@@ -10,6 +10,41 @@ type Props = {
   phoneLabel: string;
 };
 
+function onlyDigits(value: string) {
+  return value.replace(/\D/g, "");
+}
+
+function formatPhoneBR(value: string) {
+  const d = onlyDigits(value).slice(0, 11);
+  if (!d) return "";
+
+  const ddd = d.slice(0, 2);
+  const rest = d.slice(2);
+
+  if (rest.length <= 4) return `(${ddd}) ${rest}`;
+
+  // Celular (11 dígitos): (11) 99999-9999
+  if (d.length >= 11) {
+    const p1 = rest.slice(0, 5);
+    const p2 = rest.slice(5, 9);
+    return `(${ddd}) ${p1}${p2 ? `-${p2}` : ""}`;
+  }
+
+  // Fixo (10 dígitos): (11) 9999-9999
+  const p1 = rest.slice(0, 4);
+  const p2 = rest.slice(4, 8);
+  return `(${ddd}) ${p1}${p2 ? `-${p2}` : ""}`;
+}
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
+function isValidPhoneBR(value: string) {
+  const d = onlyDigits(value);
+  return d.length === 10 || d.length === 11;
+}
+
 export default function EmailContactForm({
   kind,
   title,
@@ -23,20 +58,26 @@ export default function EmailContactForm({
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState<null | "ok" | "error">(null);
+  const [touched, setTouched] = useState({ email: false, phone: false });
+
+  const emailOk = useMemo(() => isValidEmail(email), [email]);
+  const phoneOk = useMemo(() => isValidPhoneBR(phone), [phone]);
 
   const canSubmit = useMemo(() => {
     return (
       name.trim() &&
-      email.trim() &&
-      phone.trim() &&
       subject.trim() &&
       message.trim() &&
+      emailOk &&
+      phoneOk &&
       !loading
     );
-  }, [email, loading, message, name, phone, subject]);
+  }, [emailOk, loading, message, name, phoneOk, subject]);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
+
+    setTouched({ email: true, phone: true });
     if (!canSubmit) return;
 
     setLoading(true);
@@ -66,6 +107,7 @@ export default function EmailContactForm({
     setPhone("");
     setSubject("");
     setMessage("");
+    setTouched({ email: false, phone: false });
   }
 
   return (
@@ -98,21 +140,41 @@ export default function EmailContactForm({
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => setTouched((t) => ({ ...t, email: true }))}
               placeholder="seuemail@exemplo.com"
               type="email"
-              className="mt-2 h-11 w-full rounded-xl border border-white/10 bg-deep/40 px-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-white/20"
+              inputMode="email"
+              autoComplete="email"
+              aria-invalid={touched.email && !emailOk}
+              className="mt-2 h-11 w-full rounded-xl border border-white/10 bg-deep/40 px-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-white/20 aria-[invalid=true]:border-rose-400/60"
               required
             />
+            {touched.email && !emailOk ? (
+              <div className="mt-2 text-xs text-rose-200">
+                Informe um e-mail válido.
+              </div>
+            ) : null}
           </div>
+
           <div>
             <label className="text-sm font-semibold text-white/85">Telefone *</label>
             <input
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(formatPhoneBR(e.target.value))}
+              onBlur={() => setTouched((t) => ({ ...t, phone: true }))}
               placeholder="(11) 99999-9999"
-              className="mt-2 h-11 w-full rounded-xl border border-white/10 bg-deep/40 px-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-white/20"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              aria-invalid={touched.phone && !phoneOk}
+              className="mt-2 h-11 w-full rounded-xl border border-white/10 bg-deep/40 px-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-white/20 aria-[invalid=true]:border-rose-400/60"
               required
             />
+            {touched.phone && !phoneOk ? (
+              <div className="mt-2 text-xs text-rose-200">
+                Informe um telefone válido com DDD.
+              </div>
+            ) : null}
           </div>
         </div>
 
