@@ -66,10 +66,7 @@ export default function ConsertosDeCelular() {
   return (
     <div className="min-h-screen">
       <Header />
-      <WhatsAppFab
-        phone="5511993891011"
-        text="Olá! Preciso de assistência técnica. Meu modelo é ____ e o problema é ____."
-      />
+      <WhatsAppFab />
 
       <main className="pt-24">
         <section className="relative py-12" aria-label="Consertos de Celular">
