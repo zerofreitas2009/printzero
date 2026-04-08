@@ -1,8 +1,6 @@
 export default function Footer() {
   return (
-    <footer
-      id="contato"
-      className="border-t border-white/10 bg-deep/50 scroll-mt-24">
+    <footer className="border-t border-white/10 bg-deep/50">
       <div className="mx-auto max-w-6xl px-4 py-10">
         <div className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-start">
           <div>

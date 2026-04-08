@@ -8,7 +8,7 @@ const navItems: NavItem[] = [
   { label: "Início", href: "#inicio" },
   { label: "Serviços", href: "#servicos" },
   { label: "Portfólio (Sistemas)", href: "#portfolio" },
-  { label: "Assistência Técnica (Celulares)", href: "#assistencia" },
+  { label: "Assistência Técnica (Celulares)", href: "/consertos-de-celular" },
   { label: "Contato", href: "#contato" },
 ];
 
@@ -31,13 +31,21 @@ export default function Header() {
     scrollToHash(location.hash);
   }, [isHome, location.hash]);
 
-  function onNavClick(hash: string) {
+  function onNavClick(href: string) {
     setOpen(false);
-    if (!isHome) {
-      navigate(`/${hash}`);
+
+    if (href.startsWith("/")) {
+      navigate(href);
       return;
     }
-    scrollToHash(hash);
+
+    // Âncoras na home
+    if (!isHome) {
+      navigate(`/${href}`);
+      return;
+    }
+
+    scrollToHash(href);
   }
 
   return (
