@@ -196,23 +196,25 @@ export default function Index() {
                       : null}
                   </div>
 
-                  <div className="mt-6 h-px w-full bg-gradient-to-r from-white/0 via-white/15 to-white/0" />
+                  <div className="mt-auto">
+                    <div className="mt-6 h-px w-full bg-gradient-to-r from-white/0 via-white/15 to-white/0" />
 
-                  <a
-                    href={WHATSAPP}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() =>
-                      trackLeadEvent({
-                        event_type: "contact_click",
-                        contact_kind: "orcamento",
-                        contact_channel: "whatsapp",
-                      })
-                    }
-                    className="mt-5 inline-flex w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
-                    Solicitar orçamento
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
+                    <a
+                      href={WHATSAPP}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() =>
+                        trackLeadEvent({
+                          event_type: "contact_click",
+                          contact_kind: "orcamento",
+                          contact_channel: "whatsapp",
+                        })
+                      }
+                      className="mt-5 inline-flex h-11 w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-5 text-sm font-semibold leading-none text-white shadow-glow transition hover:opacity-95">
+                      Solicitar orçamento
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -236,9 +238,9 @@ export default function Index() {
                 <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <Link
                     to="/consertos-de-celular"
-                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 text-sm font-semibold text-white transition hover:bg-white/10">
+                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 text-[13px] font-semibold leading-none text-white transition hover:bg-white/10 md:px-5 md:text-sm">
                     Ver assistência técnica
-                    <ArrowRight className="h-4 w-4 text-white/70" />
+                    <ArrowRight className="h-4 w-4 shrink-0 text-white/70" />
                   </Link>
                   <a
                     href={WHATSAPP_ASSISTENCIA}
@@ -251,9 +253,9 @@ export default function Index() {
                         contact_channel: "whatsapp",
                       })
                     }
-                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-5 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
+                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-4 text-[13px] font-semibold leading-none text-white shadow-glow transition hover:opacity-95 md:px-5 md:text-sm">
                     Falar no WhatsApp
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 shrink-0" />
                   </a>
                 </div>
               </div>
