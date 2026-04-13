@@ -256,9 +256,4 @@ export default function ConsertosDeCelular() {
       <Footer />
     </div>
   );
-} </div>
-  );
-};
-} </div>
-  );
 }
