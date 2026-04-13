@@ -8,8 +8,14 @@ import Reveal from "../components/Reveal";
 import WhatsAppFab from "../components/WhatsAppFab";
 import { trackLeadEvent } from "../lib/pzLeadTracking";
 
-const WHATSAPP_SISTEMAS = "https://wa.me/5511975495126";
+const WHATSAPP_SISTEMAS_PHONE = "5511975495126";
 const WHATSAPP_ASSISTENCIA = "https://wa.me/5511993891011";
+
+const WHATSAPP_SISTEMAS_TEXT =
+  "Olá! Vim pela página da PrintZero (Contato — Sistemas) e quero contratar serviços de informática (site/sistema).";
+const WHATSAPP_SISTEMAS = `https://wa.me/${WHATSAPP_SISTEMAS_PHONE}?text=${encodeURIComponent(
+  WHATSAPP_SISTEMAS_TEXT
+)}`;
 
 type Kind = "orcamento" | "assistencia";
 
