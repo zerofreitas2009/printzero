@@ -1,5 +1,6 @@
 import { type FormEvent, useMemo, useState } from "react";
 import { supabase } from "../integrations/supabase/client";
+import { trackLeadEvent } from "../lib/pzLeadTracking";
 
 type Kind = "assistencia" | "orcamento";
 
@@ -80,10 +81,20 @@ export default function EmailContactForm({
     setTouched({ email: true, phone: true });
     if (!canSubmit) return;
 
+    trackLeadEvent({
+      event_type: "form_submit",
+      contact_kind: kind,
+      contact_channel: "email",
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      subject: subject.trim(),
+    });
+
     setLoading(true);
     setSent(null);
 
-    const { error } = await supabase.functions.invoke("printzero-send-email", {
+    const { error } = await supabase.functions.invoke("pz_send_email", {
       body: {
         kind,
         name,

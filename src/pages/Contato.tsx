@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Reveal from "../components/Reveal";
 import WhatsAppFab from "../components/WhatsAppFab";
+import { trackLeadEvent } from "../lib/pzLeadTracking";
 
 const WHATSAPP_SISTEMAS = "https://wa.me/5511975495126";
 const WHATSAPP_ASSISTENCIA = "https://wa.me/5511993891011";
@@ -118,6 +119,13 @@ export default function Contato() {
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                     <a
                       href={`mailto:${contact.email}`}
+                      onClick={() =>
+                        trackLeadEvent({
+                          event_type: "contact_click",
+                          contact_kind: contact.kind,
+                          contact_channel: "email",
+                        })
+                      }
                       className="inline-flex h-12 items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 text-sm font-semibold text-white transition hover:bg-white/10">
                       Enviar e-mail
                     </a>
@@ -125,6 +133,13 @@ export default function Contato() {
                       href={contact.whatsapp}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={() =>
+                        trackLeadEvent({
+                          event_type: "contact_click",
+                          contact_kind: contact.kind,
+                          contact_channel: "whatsapp",
+                        })
+                      }
                       className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-6 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
                       Chamar no WhatsApp
                       <ArrowRight className="h-4 w-4" />
@@ -138,6 +153,13 @@ export default function Contato() {
                       </div>
                       <Link
                         to="/consertos-de-celular"
+                        onClick={() =>
+                          trackLeadEvent({
+                            event_type: "contact_click",
+                            contact_kind: "assistencia",
+                            contact_channel: "page_link",
+                          })
+                        }
                         className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-sky-200 transition hover:text-white">
                         Abrir Assistência Técnica
                         <ArrowRight className="h-4 w-4" />

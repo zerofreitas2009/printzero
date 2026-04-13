@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { trackLeadEvent } from "../lib/pzLeadTracking";
 
 type NavItem = { label: string; href: string };
 
@@ -77,6 +78,13 @@ export default function Header() {
             href="https://wa.me/5511975495126"
             target="_blank"
             rel="noreferrer"
+            onClick={() =>
+              trackLeadEvent({
+                event_type: "contact_click",
+                contact_kind: "orcamento",
+                contact_channel: "whatsapp",
+              })
+            }
             className="rounded-full bg-gradient-to-r from-royal to-sky-400 px-4 py-2 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
             WhatsApp
           </a>
@@ -105,6 +113,13 @@ export default function Header() {
               href="https://wa.me/5511975495126"
               target="_blank"
               rel="noreferrer"
+              onClick={() =>
+                trackLeadEvent({
+                  event_type: "contact_click",
+                  contact_kind: "orcamento",
+                  contact_channel: "whatsapp",
+                })
+              }
               className="mt-2 inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-royal to-sky-400 px-4 py-3 text-sm font-semibold text-white shadow-glow">
               Falar no WhatsApp
             </a>

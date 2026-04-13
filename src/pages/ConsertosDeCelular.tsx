@@ -17,6 +17,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Reveal from "../components/Reveal";
 import WhatsAppFab from "../components/WhatsAppFab";
+import { trackLeadEvent } from "../lib/pzLeadTracking";
 
 const WHATSAPP_ASSISTENCIA = "https://wa.me/5511993891011";
 
@@ -104,12 +105,26 @@ export default function ConsertosDeCelular() {
                   href={WHATSAPP_ASSISTENCIA}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() =>
+                    trackLeadEvent({
+                      event_type: "contact_click",
+                      contact_kind: "assistencia",
+                      contact_channel: "whatsapp",
+                    })
+                  }
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
                   Orçar no WhatsApp
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
                   href="mailto:printzeroinfo@gmail.com"
+                  onClick={() =>
+                    trackLeadEvent({
+                      event_type: "contact_click",
+                      contact_kind: "assistencia",
+                      contact_channel: "email",
+                    })
+                  }
                   className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
                   printzeroinfo@gmail.com
                 </a>
@@ -178,6 +193,13 @@ export default function ConsertosDeCelular() {
                     href={WHATSAPP_ASSISTENCIA}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={() =>
+                      trackLeadEvent({
+                        event_type: "contact_click",
+                        contact_kind: "assistencia",
+                        contact_channel: "whatsapp",
+                      })
+                    }
                     className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/15">
                     Chamar no WhatsApp
                     <ArrowRight className="h-4 w-4" />
@@ -214,6 +236,13 @@ export default function ConsertosDeCelular() {
                   href={WHATSAPP_ASSISTENCIA}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() =>
+                    trackLeadEvent({
+                      event_type: "contact_click",
+                      contact_kind: "assistencia",
+                      contact_channel: "whatsapp",
+                    })
+                  }
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15">
                   Solicitar orçamento
                   <ArrowRight className="h-4 w-4" />
@@ -226,5 +255,10 @@ export default function ConsertosDeCelular() {
 
       <Footer />
     </div>
+  );
+} </div>
+  );
+};
+} </div>
   );
 }

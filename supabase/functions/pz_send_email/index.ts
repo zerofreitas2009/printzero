@@ -38,7 +38,7 @@ serve(async (req) => {
     const fromEmail = Deno.env.get("PRINTZERO_FROM_EMAIL");
 
     if (!resendKey || !fromEmail) {
-      console.error("[printzero-send-email] Missing secrets", {
+      console.error("[pz_send_email] Missing secrets", {
         hasResendKey: Boolean(resendKey),
         hasFromEmail: Boolean(fromEmail),
       });
@@ -109,7 +109,7 @@ serve(async (req) => {
 
     if (!res.ok) {
       const errText = await res.text();
-      console.error("[printzero-send-email] Resend error", {
+      console.error("[pz_send_email] Resend error", {
         status: res.status,
         errText,
       });
@@ -117,11 +117,11 @@ serve(async (req) => {
     }
 
     const data = await res.json();
-    console.log("[printzero-send-email] Email sent", { kind, to, data });
+    console.log("[pz_send_email] Email sent", { kind, to, data });
 
     return json({ ok: true });
   } catch (error) {
-    console.error("[printzero-send-email] Unexpected error", { error });
+    console.error("[pz_send_email] Unexpected error", { error });
     return json({ error: "Erro inesperado" }, 500);
   }
 });
@@ -134,3 +134,4 @@ function escapeHtml(input: string) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+
