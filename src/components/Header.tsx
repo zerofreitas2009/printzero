@@ -5,6 +5,13 @@ import { trackLeadEvent } from "../lib/pzLeadTracking";
 
 type NavItem = { label: string; href: string };
 
+const WHATSAPP_SISTEMAS_PHONE = "5511975495126";
+const WHATSAPP_SISTEMAS_TEXT =
+  "Olá! Vim pela página da PrintZero e quero contratar serviços de informática (site/sistema).";
+const WHATSAPP_SISTEMAS_HREF = `https://wa.me/${WHATSAPP_SISTEMAS_PHONE}?text=${encodeURIComponent(
+  WHATSAPP_SISTEMAS_TEXT
+)}`;
+
 const navItems: NavItem[] = [
   { label: "Início", href: "#inicio" },
   { label: "Serviços", href: "#servicos" },
@@ -75,7 +82,7 @@ export default function Header() {
             </button>
           ))}
           <a
-            href="https://wa.me/5511975495126"
+            href={WHATSAPP_SISTEMAS_HREF}
             target="_blank"
             rel="noreferrer"
             onClick={() =>
@@ -110,7 +117,7 @@ export default function Header() {
               </button>
             ))}
             <a
-              href="https://wa.me/5511975495126"
+              href={WHATSAPP_SISTEMAS_HREF}
               target="_blank"
               rel="noreferrer"
               onClick={() =>

@@ -9,7 +9,8 @@ type Props = {
 
 export default function WhatsAppFab({
   phone = "5511975495126",
-  text = "Olá! Quero um orçamento para site/sistema ou assistência técnica.",
+  text =
+    "Olá! Vim pela página da PrintZero e quero contratar serviços de informática (site/sistema).",
   className,
 }: Props) {
   const msg = encodeURIComponent(text);
