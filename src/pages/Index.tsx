@@ -238,7 +238,7 @@ export default function Index() {
                 <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <Link
                     to="/consertos-de-celular"
-                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 text-[13px] font-semibold leading-none text-white transition hover:bg-white/10 md:px-5 md:text-sm">
+                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 text-center text-[12px] font-semibold leading-tight text-white transition hover:bg-white/10 sm:px-4 sm:text-[13px] md:px-5 md:text-sm">
                     Ver assistência técnica
                     <ArrowRight className="h-4 w-4 shrink-0 text-white/70" />
                   </Link>
