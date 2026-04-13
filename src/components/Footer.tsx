@@ -8,6 +8,17 @@ export default function Footer() {
             <div className="mt-1 text-sm text-white/70">
               Tecnologia, sistemas e assistência técnica.
             </div>
+
+            <div className="mt-4 text-sm text-white/70">
+              <div>
+                CNPJ: <span className="text-white">29.304.820/0001-59</span>
+              </div>
+              <div className="mt-2">
+                Avenida Pauliceia, 767
+                <br />
+                CEP 07744-025 — Caieiras — SP
+              </div>
+            </div>
           </div>
 
           <div className="grid w-full gap-6 sm:w-auto sm:grid-cols-2">
