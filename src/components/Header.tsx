@@ -9,7 +9,7 @@ const navItems: NavItem[] = [
   { label: "Serviços", href: "#servicos" },
   { label: "Portfólio (Sistemas)", href: "#portfolio" },
   { label: "Assistência Técnica (Celulares)", href: "/consertos-de-celular" },
-  { label: "Contato", href: "#contato" },
+  { label: "Contato", href: "/contato" },
 ];
 
 function scrollToHash(hash: string) {
