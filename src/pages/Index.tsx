@@ -277,31 +277,55 @@ export default function Index() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            <Reveal>
-              <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-glow">
-                <div className="border-b border-white/10 bg-white/5 px-5 py-4">
-                  <div className="text-sm font-semibold">🎬 Vídeo de apresentação</div>
-                  <div className="text-xs text-white/60">
-                    Apresentação do LocalDesk (Sistema de Chamados)
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:col-span-2">
+              <Reveal>
+                <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-glow">
+                  <div className="border-b border-white/10 bg-white/5 px-5 py-4">
+                    <div className="text-sm font-semibold">🎬 Vídeo de apresentação</div>
+                    <div className="text-xs text-white/60">
+                      Apresentação do LocalDesk (Sistema de Chamados)
+                    </div>
+                  </div>
+                  <div className="aspect-video">
+                    <iframe
+                      className="h-full w-full"
+                      src="https://www.youtube.com/embed/60tT3xcmDsM"
+                      title="Apresentação do LocalDesk (Sistema de Chamados)"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
                   </div>
                 </div>
-                <div className="aspect-video">
-                  <iframe
-                    className="h-full w-full"
-                    src="https://www.youtube.com/embed/60tT3xcmDsM"
-                    title="Apresentação do LocalDesk (Sistema de Chamados)"
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
+              </Reveal>
+
+              <Reveal delayMs={80}>
+                <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-glow">
+                  <div className="border-b border-white/10 bg-white/5 px-5 py-4">
+                    <div className="text-sm font-semibold">🎬 Vídeo de apresentação</div>
+                    <div className="text-xs text-white/60">
+                      Apresentação do Sistema de Agência de Empregos
+                    </div>
+                  </div>
+                  <div className="aspect-video">
+                    <iframe
+                      className="h-full w-full"
+                      src="https://www.youtube.com/embed/dn7CoCsAxhE"
+                      title="Apresentação do Sistema de Agência de Empregos"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            </div>
 
             <div className="grid gap-5">
-              <Reveal delayMs={80}>
+              <Reveal delayMs={160}>
                 <a
                   href="https://localdesk.buscalocal.net/"
                   target="_blank"
@@ -323,7 +347,7 @@ export default function Index() {
                 </a>
               </Reveal>
 
-              <Reveal delayMs={160}>
+              <Reveal delayMs={240}>
                 <a
                   href="https://buscalocal.net/"
                   target="_blank"
@@ -345,7 +369,29 @@ export default function Index() {
                 </a>
               </Reveal>
 
-              <Reveal delayMs={240}>
+              <Reveal delayMs={320}>
+                <a
+                  href="https://projeto-agencias-emprego.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="text-lg font-semibold">💼 Agência de Empregos</div>
+                      <p className="mt-2 text-sm text-white/70">
+                        Gestão de vagas, candidatos e encaminhamentos com interface moderna.
+                      </p>
+                    </div>
+                    <ExternalLink className="h-5 w-5 text-white/60 transition group-hover:text-white" />
+                  </div>
+                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-200 group-hover:text-white">
+                    Acessar
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
+                </a>
+              </Reveal>
+
+              <Reveal delayMs={400}>
                 <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-royal/20 to-white/5 p-6">
                   <div className="text-sm font-semibold">✨ Quer um sistema próprio?</div>
                   <p className="mt-2 text-sm text-white/70">
