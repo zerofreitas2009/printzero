@@ -6,6 +6,7 @@ import { trackLeadEvent } from "../lib/pzLeadTracking";
 import Header from "../components/Header";
 import Reveal from "../components/Reveal";
 import WhatsAppFab from "../components/WhatsAppFab";
+import PortfolioCarousel from "../components/PortfolioCarousel";
 
 const WHATSAPP = "https://wa.me/5511975495126";
 const WHATSAPP_ASSISTENCIA = "https://wa.me/5511993891011";
@@ -41,6 +42,7 @@ const clientPortfolio = [
   { name: "LOHN Advocacia", url: "https://advocacialohn.adv.br/" },
   { name: "LocalDesk Sistema de Chamados", url: "https://localdesk.buscalocal.net/" },
   { name: "BuscaLocal Sistemas de Buscas de Negócio", url: "https://buscalocal.net/" },
+  { name: "Agência de Empregos", url: "https://projeto-agencias-emprego.vercel.app/" },
 ];
 
 export default function Index() {
@@ -331,14 +333,14 @@ export default function Index() {
                   target="_blank"
                   rel="noreferrer"
                   className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between gap-4">
                       <div className="text-lg font-semibold">🎧 LocalDesk</div>
-                      <p className="mt-2 text-sm text-white/70">
-                        Centralize atendimento e gestão com um HelpDesk moderno.
-                      </p>
+                      <ExternalLink className="h-5 w-5 text-white/60 transition group-hover:text-white" />
                     </div>
-                    <ExternalLink className="h-5 w-5 text-white/60 transition group-hover:text-white" />
+                    <p className="mt-2 text-sm text-white/70">
+                      Centralize atendimento e gestão com um HelpDesk moderno.
+                    </p>
                   </div>
                   <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-200 group-hover:text-white">
                     Acessar
@@ -353,14 +355,14 @@ export default function Index() {
                   target="_blank"
                   rel="noreferrer"
                   className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between gap-4">
                       <div className="text-lg font-semibold">📍 BuscaLocal</div>
-                      <p className="mt-2 text-sm text-white/70">
-                        Presença digital com foco em descoberta, tráfego e conversão.
-                      </p>
+                      <ExternalLink className="h-5 w-5 text-white/60 transition group-hover:text-white" />
                     </div>
-                    <ExternalLink className="h-5 w-5 text-white/60 transition group-hover:text-white" />
+                    <p className="mt-2 text-sm text-white/70">
+                      Presença digital com foco em descoberta, tráfego e conversão.
+                    </p>
                   </div>
                   <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-200 group-hover:text-white">
                     Acessar
@@ -375,14 +377,14 @@ export default function Index() {
                   target="_blank"
                   rel="noreferrer"
                   className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between gap-4">
                       <div className="text-lg font-semibold">💼 Agência de Empregos</div>
-                      <p className="mt-2 text-sm text-white/70">
-                        Gestão de vagas, candidatos e encaminhamentos com interface moderna.
-                      </p>
+                      <ExternalLink className="h-5 w-5 text-white/60 transition group-hover:text-white" />
                     </div>
-                    <ExternalLink className="h-5 w-5 text-white/60 transition group-hover:text-white" />
+                    <p className="mt-2 text-sm text-white/70">
+                      Gestão de vagas, candidatos e encaminhamentos com interface moderna.
+                    </p>
                   </div>
                   <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-200 group-hover:text-white">
                     Acessar
@@ -431,18 +433,10 @@ export default function Index() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {clientPortfolio.map((item, idx) => (
-              <Reveal key={item.url} delayMs={idx * 60}>
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex h-20 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 text-center text-xs font-semibold text-white/80 transition hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/10">
-                  <span className="leading-snug">{item.name}</span>
-                </a>
-              </Reveal>
-            ))}
+          <div className="mt-10">
+            <Reveal>
+              <PortfolioCarousel items={clientPortfolio} />
+            </Reveal>
           </div>
         </div>
       </section>
