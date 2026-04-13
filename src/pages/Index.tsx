@@ -277,8 +277,8 @@ export default function Index() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
-            <div className="grid gap-6 md:grid-cols-2 lg:col-span-2">
+          <div className="mt-10 space-y-10">
+            <div className="grid gap-6 md:grid-cols-2">
               <Reveal>
                 <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-glow">
                   <div className="border-b border-white/10 bg-white/5 px-5 py-4">
@@ -324,13 +324,13 @@ export default function Index() {
               </Reveal>
             </div>
 
-            <div className="grid gap-5">
-              <Reveal delayMs={160}>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              <Reveal delayMs={140}>
                 <a
                   href="https://localdesk.buscalocal.net/"
                   target="_blank"
                   rel="noreferrer"
-                  className="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
+                  className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-lg font-semibold">🎧 LocalDesk</div>
@@ -347,12 +347,12 @@ export default function Index() {
                 </a>
               </Reveal>
 
-              <Reveal delayMs={240}>
+              <Reveal delayMs={200}>
                 <a
                   href="https://buscalocal.net/"
                   target="_blank"
                   rel="noreferrer"
-                  className="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
+                  className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-lg font-semibold">📍 BuscaLocal</div>
@@ -369,12 +369,12 @@ export default function Index() {
                 </a>
               </Reveal>
 
-              <Reveal delayMs={320}>
+              <Reveal delayMs={260}>
                 <a
                   href="https://projeto-agencias-emprego.vercel.app/"
                   target="_blank"
                   rel="noreferrer"
-                  className="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
+                  className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="text-lg font-semibold">💼 Agência de Empregos</div>
@@ -391,12 +391,14 @@ export default function Index() {
                 </a>
               </Reveal>
 
-              <Reveal delayMs={400}>
-                <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-royal/20 to-white/5 p-6">
-                  <div className="text-sm font-semibold">✨ Quer um sistema próprio?</div>
-                  <p className="mt-2 text-sm text-white/70">
-                    Criamos SaaS sob medida com UI moderna, escalabilidade e manutenção.
-                  </p>
+              <Reveal delayMs={320}>
+                <div className="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-gradient-to-br from-royal/20 to-white/5 p-6">
+                  <div>
+                    <div className="text-sm font-semibold">✨ Quer um sistema próprio?</div>
+                    <p className="mt-2 text-sm text-white/70">
+                      Criamos SaaS sob medida com UI moderna, escalabilidade e manutenção.
+                    </p>
+                  </div>
                   <a
                     href={WHATSAPP}
                     target="_blank"
