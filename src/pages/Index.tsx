@@ -36,7 +36,8 @@ const clientPortfolio = [
   {
     name: "BuscaLocal Sistemas de Buscas de Negócio",
     url: "https://buscalocal.net/",
-    // logoSrc: "/assets/clientes/buscalocal.png",
+    logoSrc: "/assets/clientes/buscalocal.png",
+    logoAlt: "BuscaLocal",
   },
   {
     name: "Gestão de Contratação",
