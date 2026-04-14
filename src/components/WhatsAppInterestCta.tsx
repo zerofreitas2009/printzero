@@ -1,5 +1,6 @@
 import { ArrowRight, X } from "lucide-react";
 import { useEffect, useId, useState } from "react";
+import { createPortal } from "react-dom";
 
 const buildWhatsAppLink = (base: string, message: string) => {
   const sep = base.includes("?") ? "&" : "?";
@@ -24,7 +25,12 @@ export default function WhatsAppInterestCta({
   assistMessage?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const titleId = useId();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -48,6 +54,81 @@ export default function WhatsAppInterestCta({
     setOpen(false);
   };
 
+  const modal = (
+    <>
+      {/* Overlay/backdrop */}
+      <div
+        className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm"
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* Modal */}
+      <div
+        className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}>
+        <div className="w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-deep shadow-[0_20px_80px_rgba(0,0,0,0.75)]">
+          <div className="flex items-start justify-between gap-4 border-b border-white/10 bg-white/5 px-5 py-4">
+            <div>
+              <div id={titleId} className="text-base font-semibold">
+                Como podemos te ajudar?
+              </div>
+              <div className="mt-1 text-sm text-white/70">
+                Escolha uma opção para abrir o WhatsApp com mensagem personalizada.
+              </div>
+            </div>
+            <button
+              type="button"
+              aria-label="Fechar"
+              onClick={() => setOpen(false)}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition hover:bg-white/10 hover:text-white">
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+
+          <div className="max-h-[70vh] overflow-auto p-5">
+            <div className="grid gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  onTechClick?.();
+                  go(buildWhatsAppLink(techWhatsApp, techMessage));
+                }}
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-white/20 hover:bg-white/10">
+                <div className="text-sm font-semibold">Quero saber sobre sites/sistemas</div>
+                <div className="mt-1 text-xs text-white/70">
+                  Falar com o setor comercial tech.
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  onAssistClick?.();
+                  go(buildWhatsAppLink(assistWhatsApp, assistMessage));
+                }}
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-white/20 hover:bg-white/10">
+                <div className="text-sm font-semibold">Preciso de reparo/conserto</div>
+                <div className="mt-1 text-xs text-white/70">
+                  Ir direto para a assistência técnica.
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 text-sm font-semibold text-white/90 transition hover:bg-white/10">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <>
       <button
@@ -59,80 +140,7 @@ export default function WhatsAppInterestCta({
         <ArrowRight className="h-4 w-4" />
       </button>
 
-      {open ? (
-        <>
-          {/* Overlay/backdrop */}
-          <div
-            className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
-            aria-hidden="true"
-          />
-
-          {/* Modal */}
-          <div
-            className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={titleId}>
-            <div className="w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-deep shadow-[0_20px_80px_rgba(0,0,0,0.75)]">
-              <div className="flex items-start justify-between gap-4 border-b border-white/10 bg-white/5 px-5 py-4">
-                <div>
-                  <div id={titleId} className="text-base font-semibold">
-                    Como podemos te ajudar?
-                  </div>
-                  <div className="mt-1 text-sm text-white/70">
-                    Escolha uma opção para abrir o WhatsApp com mensagem personalizada.
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  aria-label="Fechar"
-                  onClick={() => setOpen(false)}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition hover:bg-white/10 hover:text-white">
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-
-              <div className="max-h-[70vh] overflow-auto p-5">
-                <div className="grid gap-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onTechClick?.();
-                      go(buildWhatsAppLink(techWhatsApp, techMessage));
-                    }}
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-white/20 hover:bg-white/10">
-                    <div className="text-sm font-semibold">Quero saber sobre sites/sistemas</div>
-                    <div className="mt-1 text-xs text-white/70">
-                      Falar com o setor comercial tech.
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onAssistClick?.();
-                      go(buildWhatsAppLink(assistWhatsApp, assistMessage));
-                    }}
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-white/20 hover:bg-white/10">
-                    <div className="text-sm font-semibold">Preciso de reparo/conserto</div>
-                    <div className="mt-1 text-xs text-white/70">
-                      Ir direto para a assistência técnica.
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setOpen(false)}
-                    className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 text-sm font-semibold text-white/90 transition hover:bg-white/10">
-                    Cancelar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : null}
+      {open && mounted ? createPortal(modal, document.body) : null}
     </>
   );
 }
