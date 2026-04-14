@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 
 const buildWhatsAppLink = (base: string, message: string) => {
@@ -56,7 +56,7 @@ export default function WhatsAppInterestCta({
 
       {open ? (
         <div
-          className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm sm:items-center"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/80 p-4 backdrop-blur-md sm:items-center sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
@@ -65,49 +65,60 @@ export default function WhatsAppInterestCta({
           }}>
           <div
             ref={panelRef}
-            className="w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-deep/95 shadow-glow">
-            <div className="border-b border-white/10 bg-white/5 px-5 py-4">
-              <div id={titleId} className="text-base font-semibold">
-                Como podemos te ajudar?
+            className="w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-deep shadow-[0_20px_80px_rgba(0,0,0,0.55)]">
+            <div className="flex items-start justify-between gap-4 border-b border-white/10 bg-white/5 px-5 py-4">
+              <div>
+                <div id={titleId} className="text-base font-semibold">
+                  Como podemos te ajudar?
+                </div>
+                <div className="mt-1 text-sm text-white/70">
+                  Escolha uma opção para abrir o WhatsApp com mensagem personalizada.
+                </div>
               </div>
-              <div className="mt-1 text-sm text-white/70">
-                Escolha uma opção para abrir o WhatsApp com mensagem personalizada.
-              </div>
+              <button
+                type="button"
+                aria-label="Fechar"
+                onClick={() => setOpen(false)}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 transition hover:bg-white/10 hover:text-white">
+                <X className="h-4 w-4" />
+              </button>
             </div>
 
-            <div className="grid gap-3 p-5">
-              <button
-                type="button"
-                onClick={() => {
-                  onTechClick?.();
-                  go(buildWhatsAppLink(techWhatsApp, techMessage));
-                }}
-                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-white/20 hover:bg-white/10">
-                <div className="text-sm font-semibold">Quero saber sobre sites/sistemas</div>
-                <div className="mt-1 text-xs text-white/70">
-                  Falar com o setor comercial tech.
-                </div>
-              </button>
+            <div className="max-h-[70vh] overflow-auto p-5">
+              <div className="grid gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    onTechClick?.();
+                    go(buildWhatsAppLink(techWhatsApp, techMessage));
+                  }}
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-white/20 hover:bg-white/10">
+                  <div className="text-sm font-semibold">Quero saber sobre sites/sistemas</div>
+                  <div className="mt-1 text-xs text-white/70">
+                    Falar com o setor comercial tech.
+                  </div>
+                </button>
 
-              <button
-                type="button"
-                onClick={() => {
-                  onAssistClick?.();
-                  go(buildWhatsAppLink(assistWhatsApp, assistMessage));
-                }}
-                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-white/20 hover:bg-white/10">
-                <div className="text-sm font-semibold">Preciso de reparo/conserto</div>
-                <div className="mt-1 text-xs text-white/70">
-                  Ir direto para a assistência técnica.
-                </div>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onAssistClick?.();
+                    go(buildWhatsAppLink(assistWhatsApp, assistMessage));
+                  }}
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-white/20 hover:bg-white/10">
+                  <div className="text-sm font-semibold">Preciso de reparo/conserto</div>
+                  <div className="mt-1 text-xs text-white/70">
+                    Ir direto para a assistência técnica.
+                  </div>
+                </button>
 
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 text-sm font-semibold text-white/90 transition hover:bg-white/10">
-                Cancelar
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 text-sm font-semibold text-white/90 transition hover:bg-white/10">
+                  Cancelar
+                </button>
+              </div>
             </div>
           </div>
         </div>
