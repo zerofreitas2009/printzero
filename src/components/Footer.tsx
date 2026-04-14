@@ -48,8 +48,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 text-xs text-white/50">
-          © {new Date().getFullYear()} PrintZero. Todos os direitos reservados.
+        <div className="mt-8 flex flex-col gap-1 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+          <div>© {new Date().getFullYear()} PrintZero. Todos os direitos reservados.</div>
+          <div className="text-white/40">Build: 2026-04-14-1</div>
         </div>
       </div>
     </footer>
