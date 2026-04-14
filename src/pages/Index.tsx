@@ -447,7 +447,7 @@ export default function Index() {
                   className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
                   <div className="flex-1">
                     <div className="flex items-start justify-between gap-4">
-                      <div className="text-lg font-semibold">💼 Agência de Empregos</div>
+                      <div className="text-lg font-semibold">💼 Gestão de Contratação</div>
                       <ExternalLink className="h-5 w-5 text-white/60 transition group-hover:text-white" />
                     </div>
                     <p className="mt-2 text-sm text-white/70">
