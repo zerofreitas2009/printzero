@@ -94,21 +94,20 @@ export default function Index() {
             </Reveal>
 
             <Reveal delayMs={260}>
-              <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {[
-                  "Alta performance e SEO",
-                  "Design responsivo (Mobile First)",
-                  "Sistemas sob medida",
-                  "Evolução e suporte contínuo",
-                ].map((t) => (
-                  <div
-                    key={t}
-                    className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80">
-                    <CheckCircle2 className="h-4 w-4 text-sky-300" />
-                    {t}
-                  </div>
-                ))}
-              </div>
+              <ul className="mt-7 space-y-3 text-sm leading-relaxed text-white/75 sm:text-[15px]">
+                {
+                  [
+                    "Tecnologia sob medida para sua empresa e suporte especializado para o seu dia a dia.",
+                    "Sua parceira em desenvolvimento digital e referência em manutenção técnica de dispositivos.",
+                    "Do desenvolvimento de sistemas complexos ao reparo preciso: excelência técnica em todas as escalas.",
+                  ].map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-sky-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
             </Reveal>
           </div>
 
