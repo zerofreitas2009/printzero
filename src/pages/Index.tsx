@@ -15,11 +15,31 @@ const WHATSAPP_ASSISTENCIA = "https://wa.me/5511993891011";
 const saasExamples = ["Pet Shop", "Comércio", "Indústria", "Financeiro", "HelpDesk"];
 
 const clientPortfolio = [
-  { name: "RL Consultoria em TI", url: "https://rlcti.com.br/" },
-  { name: "LOHN Advocacia", url: "https://advocacialohn.adv.br/" },
-  { name: "LocalDesk Sistema de Chamados", url: "https://localdesk.buscalocal.net/" },
-  { name: "BuscaLocal Sistemas de Buscas de Negócio", url: "https://buscalocal.net/" },
-  { name: "Agência de Empregos", url: "https://projeto-agencias-emprego.vercel.app/" },
+  {
+    name: "RL Consultoria em TI",
+    url: "https://rlcti.com.br/",
+    // logoSrc: "/assets/clientes/rl-consultoria.png",
+  },
+  {
+    name: "LOHN Advocacia",
+    url: "https://advocacialohn.adv.br/",
+    // logoSrc: "/assets/clientes/lohn-advocacia.png",
+  },
+  {
+    name: "LocalDesk Sistema de Chamados",
+    url: "https://localdesk.buscalocal.net/",
+    // logoSrc: "/assets/clientes/localdesk.png",
+  },
+  {
+    name: "BuscaLocal Sistemas de Buscas de Negócio",
+    url: "https://buscalocal.net/",
+    // logoSrc: "/assets/clientes/buscalocal.png",
+  },
+  {
+    name: "Gestão de Contratação",
+    url: "https://projeto-agencias-emprego.vercel.app/",
+    // logoSrc: "/assets/clientes/gestao-de-contratacao.png",
+  },
 ];
 
 export default function Index() {

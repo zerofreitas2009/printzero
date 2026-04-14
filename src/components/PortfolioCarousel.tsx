@@ -4,6 +4,8 @@ import { useRef } from "react";
 type PortfolioItem = {
   name: string;
   url: string;
+  logoSrc?: string;
+  logoAlt?: string;
 };
 
 export default function PortfolioCarousel({
@@ -34,8 +36,32 @@ export default function PortfolioCarousel({
             target="_blank"
             rel="noreferrer"
             className="group snap-start shrink-0 w-[260px] sm:w-[300px] lg:w-[320px]">
-            <div className="flex h-20 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 text-center text-xs font-semibold text-white/80 shadow-glow transition group-hover:-translate-y-0.5 group-hover:border-white/20 group-hover:bg-white/10">
-              <span className="leading-snug">{item.name}</span>
+            <div className="flex h-20 items-center gap-4 rounded-xl border border-white/10 bg-white/5 px-4 shadow-glow transition group-hover:-translate-y-0.5 group-hover:border-white/20 group-hover:bg-white/10">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white/5">
+                {item.logoSrc ? (
+                  <img
+                    src={item.logoSrc}
+                    alt={item.logoAlt ?? item.name}
+                    className="h-full w-full object-contain p-1"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span className="text-xs font-semibold text-white/70">
+                    {item.name
+                      .split(" ")
+                      .slice(0, 2)
+                      .map((w) => w[0])
+                      .join("")
+                      .toUpperCase()}
+                  </span>
+                )}
+              </div>
+              <div className="min-w-0">
+                <div className="truncate text-sm font-semibold text-white/85">
+                  {item.name}
+                </div>
+                <div className="mt-1 text-xs text-white/55">Abrir site</div>
+              </div>
             </div>
           </a>
         ))}
