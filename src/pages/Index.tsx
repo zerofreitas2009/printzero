@@ -200,15 +200,12 @@ export default function Index() {
                     ))}
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() =>
-                      document.getElementById("assistencia")?.scrollIntoView({ behavior: "smooth" })
-                    }
+                  <Link
+                    to="/consertos-de-celular"
                     className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-200 transition hover:text-white">
                     Ver assistência
                     <ArrowRight className="h-4 w-4" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
