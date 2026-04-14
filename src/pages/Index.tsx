@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, ExternalLink, Smartphone } from "lucide-react";
+import { ArrowRight, CheckCircle2, ExternalLink, Laptop, Smartphone, Wrench } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
@@ -6,34 +6,11 @@ import { trackLeadEvent } from "../lib/pzLeadTracking";
 import Header from "../components/Header";
 import Reveal from "../components/Reveal";
 import WhatsAppFab from "../components/WhatsAppFab";
+import WhatsAppInterestCta from "../components/WhatsAppInterestCta";
 import PortfolioCarousel from "../components/PortfolioCarousel";
 
 const WHATSAPP = "https://wa.me/5511975495126";
 const WHATSAPP_ASSISTENCIA = "https://wa.me/5511993891011";
-
-type Service = {
-  emoji: string;
-  title: string;
-  desc: string;
-};
-
-const services: Service[] = [
-  {
-    emoji: "🖥️",
-    title: "Sites Institucionais & Landing Pages",
-    desc: "Design moderno, rápido e pensado para conversão — com SEO e performance.",
-  },
-  {
-    emoji: "⚙️",
-    title: "Sistemas SaaS Sob Medida",
-    desc: "Pet Shop, Comércio, Indústria, Financeiro, HelpDesk e muito mais.",
-  },
-  {
-    emoji: "🔗",
-    title: "Automação & Integrações",
-    desc: "APIs, relatórios, dashboards e fluxos que reduzem custos e aumentam produtividade.",
-  },
-];
 
 const saasExamples = ["Pet Shop", "Comércio", "Indústria", "Financeiro", "HelpDesk"];
 
@@ -82,28 +59,31 @@ export default function Index() {
 
             <Reveal delayMs={140}>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-                Sites institucionais, sistemas SaaS e suporte técnico — do planejamento ao
-                lançamento. Design limpo, performance e experiência premium.
+                Soluções digitais (sites e sistemas SaaS) e assistência técnica em celulares —
+                com design limpo, performance e experiência premium.
               </p>
             </Reveal>
 
             <Reveal delayMs={200}>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <a
-                  href={WHATSAPP}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() =>
+                <WhatsAppInterestCta
+                  techWhatsApp={WHATSAPP}
+                  assistWhatsApp={WHATSAPP_ASSISTENCIA}
+                  onTechClick={() =>
                     trackLeadEvent({
                       event_type: "contact_click",
                       contact_kind: "orcamento",
                       contact_channel: "whatsapp",
                     })
                   }
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
-                  Chamar no WhatsApp
-                  <ArrowRight className="h-4 w-4" />
-                </a>
+                  onAssistClick={() =>
+                    trackLeadEvent({
+                      event_type: "contact_click",
+                      contact_kind: "assistencia",
+                      contact_channel: "whatsapp",
+                    })
+                  }
+                />
                 <button
                   onClick={() =>
                     document.getElementById("servicos")?.scrollIntoView({ behavior: "smooth" })
@@ -120,7 +100,7 @@ export default function Index() {
                   "Alta performance e SEO",
                   "Design responsivo (Mobile First)",
                   "Sistemas sob medida",
-                  "Suporte e assistência técnica",
+                  "Evolução e suporte contínuo",
                 ].map((t) => (
                   <div
                     key={t}
@@ -134,21 +114,79 @@ export default function Index() {
           </div>
 
           <Reveal className="md:justify-self-end" delayMs={120}>
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 shadow-glow">
-              <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-royal/25 blur-3xl" />
-              <div className="absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-sky-500/20 blur-3xl" />
+            <div className="grid gap-4">
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 shadow-glow">
+                <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-royal/25 blur-3xl" />
+                <div className="relative">
+                  <div className="flex items-center gap-3">
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-royal/20 text-sky-200">
+                      <Laptop className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <div className="text-base font-semibold">Soluções Digitais</div>
+                      <div className="text-sm text-white/70">
+                        Sites, landing pages e sistemas SaaS.
+                      </div>
+                    </div>
+                  </div>
 
-              <div className="relative">
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="text-sm font-semibold">Preview</div>
-                  <div className="text-xs text-white/60">UI moderna • clean</div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {["Sites", "SaaS", "Integrações", "SEO"].map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/75">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      document.getElementById("servicos")?.scrollIntoView({ behavior: "smooth" })
+                    }
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-200 transition hover:text-white">
+                    Ver detalhes
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
                 </div>
-                <img
-                  src="/assets/desenhos-home.png"
-                  alt="Desenhos e referência visual da página principal"
-                  className="w-full rounded-xl border border-white/10"
-                  loading="lazy"
-                />
+              </div>
+
+              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 shadow-glow">
+                <div className="absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-sky-500/20 blur-3xl" />
+                <div className="relative">
+                  <div className="flex items-center gap-3">
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-royal/20 text-sky-200">
+                      <Wrench className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <div className="text-base font-semibold">Manutenção & Celulares</div>
+                      <div className="text-sm text-white/70">
+                        Conserto, acessórios e assistência técnica.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {["Troca de tela", "Bateria", "Conector", "Acessórios"].map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/75">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      document.getElementById("assistencia")?.scrollIntoView({ behavior: "smooth" })
+                    }
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-200 transition hover:text-white">
+                    Ver assistência
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
               </div>
             </div>
           </Reveal>
@@ -161,104 +199,134 @@ export default function Index() {
           <Reveal>
             <div className="flex items-end justify-between gap-6">
               <div>
-                <h2 className="text-3xl font-semibold tracking-tight">Serviços</h2>
+                <h2 className="text-3xl font-semibold tracking-tight">
+                  Serviços (2 pilares)
+                </h2>
                 <p className="mt-2 max-w-2xl text-white/70">
-                  Construímos experiências digitais com base em estratégia, design e
-                  tecnologia — e damos suporte quando você precisa.
+                  Escolha seu objetivo e fale com o time certo — sem ruído e com resposta
+                  rápida.
                 </p>
               </div>
             </div>
           </Reveal>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {services.map((s, idx) => (
-              <Reveal key={s.title} delayMs={idx * 80}>
-                <div className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 shadow-glow transition hover:-translate-y-1 hover:border-white/20">
-                  <div className="flex items-start gap-3">
-                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-royal/20 text-[22px] leading-none shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] select-none">
-                      {s.emoji}
-                    </div>
-                    <div>
-                      <div className="text-lg font-semibold">{s.title}</div>
-                      <p className="mt-2 text-sm leading-relaxed text-white/70">
-                        {s.desc}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {idx === 1
-                      ? saasExamples.map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/75">
-                            {tag}
-                          </span>
-                        ))
-                      : null}
-                  </div>
-
-                  <div className="mt-auto">
-                    <div className="mt-6 h-px w-full bg-gradient-to-r from-white/0 via-white/15 to-white/0" />
-
-                    <a
-                      href={WHATSAPP}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={() =>
-                        trackLeadEvent({
-                          event_type: "contact_click",
-                          contact_kind: "orcamento",
-                          contact_channel: "whatsapp",
-                        })
-                      }
-                      className="mt-5 inline-flex h-11 w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-5 text-sm font-semibold leading-none text-white shadow-glow transition hover:opacity-95">
-                      Solicitar orçamento
-                      <ArrowRight className="h-4 w-4" />
-                    </a>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-
-            <Reveal delayMs={260}>
-              <div className="h-full rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-glow">
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            <Reveal>
+              <div className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-7 shadow-glow">
                 <div className="flex items-start gap-3">
                   <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-royal/25 text-sky-200">
-                    <Smartphone className="h-5 w-5" />
+                    <Laptop className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-lg font-semibold">
-                      Acessórios & Conserto de Celulares
-                    </div>
-                    <div className="text-sm text-white/70">
-                      Página exclusiva com lista completa de serviços.
-                    </div>
+                    <div className="text-xl font-semibold">Soluções Digitais</div>
+                    <p className="mt-2 text-sm text-white/70">
+                      Para vender mais, organizar processos e escalar.
+                    </p>
                   </div>
                 </div>
 
-                <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  <Link
-                    to="/consertos-de-celular"
-                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 text-center text-[12px] font-semibold leading-tight text-white transition hover:bg-white/10 sm:px-4 sm:text-[13px] md:px-5 md:text-sm">
-                    Assistência técnica
-                    <ArrowRight className="h-4 w-4 shrink-0 text-white/70" />
-                  </Link>
+                <div className="mt-5 grid gap-2 text-sm text-white/80">
+                  {[
+                    "Sites institucionais e landing pages (foco em conversão)",
+                    "Sistemas SaaS sob medida (cadastros, relatórios, dashboards)",
+                    "Automação e integrações (APIs, rotinas, conectores)",
+                  ].map((item) => (
+                    <div key={item} className="flex items-start gap-2">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {saasExamples.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/75">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-auto pt-6">
+                  <div className="h-px w-full bg-gradient-to-r from-white/0 via-white/15 to-white/0" />
+
                   <a
-                    href={WHATSAPP_ASSISTENCIA}
+                    href={`https://wa.me/5511975495126?text=${encodeURIComponent(
+                      "Olá! Quero saber mais sobre sites e sistemas (SaaS). Pode me ajudar?"
+                    )}`}
                     target="_blank"
                     rel="noreferrer"
                     onClick={() =>
                       trackLeadEvent({
                         event_type: "contact_click",
-                        contact_kind: "assistencia",
+                        contact_kind: "orcamento",
                         contact_channel: "whatsapp",
                       })
                     }
-                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-4 text-[13px] font-semibold leading-none text-white shadow-glow transition hover:opacity-95 md:px-5 md:text-sm">
-                    Falar no WhatsApp
-                    <ArrowRight className="h-4 w-4 shrink-0" />
+                    className="mt-5 inline-flex h-11 w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-5 text-sm font-semibold leading-none text-white shadow-glow transition hover:opacity-95">
+                    Quero sites/sistemas
+                    <ArrowRight className="h-4 w-4" />
                   </a>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delayMs={120}>
+              <div className="group flex h-full flex-col rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-7 shadow-glow">
+                <div className="flex items-start gap-3">
+                  <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-royal/25 text-sky-200">
+                    <Smartphone className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className="text-xl font-semibold">Manutenção & Celulares</div>
+                    <p className="mt-2 text-sm text-white/70">
+                      Diagnóstico rápido e transparência no atendimento.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-5 grid gap-2 text-sm text-white/80">
+                  {[
+                    "Conserto de celulares e otimizações",
+                    "Troca de peças e manutenção preventiva",
+                    "Acessórios e soluções para o dia a dia",
+                  ].map((item) => (
+                    <div key={item} className="flex items-start gap-2">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-auto pt-6">
+                  <div className="h-px w-full bg-gradient-to-r from-white/0 via-white/15 to-white/0" />
+
+                  <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <Link
+                      to="/consertos-de-celular"
+                      className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 text-center text-[12px] font-semibold leading-tight text-white transition hover:bg-white/10 sm:px-4 sm:text-[13px]">
+                      Ver serviços
+                      <ArrowRight className="h-4 w-4 shrink-0 text-white/70" />
+                    </Link>
+                    <a
+                      href={`https://wa.me/5511993891011?text=${encodeURIComponent(
+                        "Olá! Preciso de reparo/conserto de celular. Pode me ajudar?"
+                      )}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() =>
+                        trackLeadEvent({
+                          event_type: "contact_click",
+                          contact_kind: "assistencia",
+                          contact_channel: "whatsapp",
+                        })
+                      }
+                      className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-4 text-[13px] font-semibold leading-none text-white shadow-glow transition hover:opacity-95">
+                      Preciso de reparo
+                      <ArrowRight className="h-4 w-4 shrink-0" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </Reveal>

@@ -1,0 +1,117 @@
+import { ArrowRight } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
+
+const buildWhatsAppLink = (base: string, message: string) => {
+  const sep = base.includes("?") ? "&" : "?";
+  return `${base}${sep}text=${encodeURIComponent(message)}`;
+};
+
+export default function WhatsAppInterestCta({
+  label = "Chamar no WhatsApp",
+  techWhatsApp,
+  assistWhatsApp,
+  onTechClick,
+  onAssistClick,
+  techMessage = "Olá! Quero saber mais sobre sites e sistemas (SaaS). Pode me ajudar?",
+  assistMessage = "Olá! Preciso de reparo/conserto de celular. Pode me ajudar?",
+}: {
+  label?: string;
+  techWhatsApp: string;
+  assistWhatsApp: string;
+  onTechClick?: () => void;
+  onAssistClick?: () => void;
+  techMessage?: string;
+  assistMessage?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const titleId = useId();
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
+  const go = (href: string) => {
+    window.open(href, "_blank", "noopener,noreferrer");
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-95"
+        aria-haspopup="dialog">
+        {label}
+        <ArrowRight className="h-4 w-4" />
+      </button>
+
+      {open ? (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 p-4 backdrop-blur-sm sm:items-center"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) setOpen(false);
+          }}>
+          <div
+            ref={panelRef}
+            className="w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-deep/95 shadow-glow">
+            <div className="border-b border-white/10 bg-white/5 px-5 py-4">
+              <div id={titleId} className="text-base font-semibold">
+                Como podemos te ajudar?
+              </div>
+              <div className="mt-1 text-sm text-white/70">
+                Escolha uma opção para abrir o WhatsApp com mensagem personalizada.
+              </div>
+            </div>
+
+            <div className="grid gap-3 p-5">
+              <button
+                type="button"
+                onClick={() => {
+                  onTechClick?.();
+                  go(buildWhatsAppLink(techWhatsApp, techMessage));
+                }}
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-white/20 hover:bg-white/10">
+                <div className="text-sm font-semibold">Quero saber sobre sites/sistemas</div>
+                <div className="mt-1 text-xs text-white/70">
+                  Falar com o setor comercial tech.
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  onAssistClick?.();
+                  go(buildWhatsAppLink(assistWhatsApp, assistMessage));
+                }}
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-left transition hover:border-white/20 hover:bg-white/10">
+                <div className="text-sm font-semibold">Preciso de reparo/conserto</div>
+                <div className="mt-1 text-xs text-white/70">
+                  Ir direto para a assistência técnica.
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 text-sm font-semibold text-white/90 transition hover:bg-white/10">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
+}
