@@ -18,7 +18,8 @@ const clientPortfolio = [
   {
     name: "RL Consultoria em TI",
     url: "https://rlcti.com.br/",
-    // logoSrc: "/assets/clientes/rl-consultoria.png",
+    logoSrc: "/assets/clientes/rl-consultoria.jpeg",
+    logoAlt: "RL Gestão e Consultoria em TI",
   },
   {
     name: "LOHN Advocacia",
