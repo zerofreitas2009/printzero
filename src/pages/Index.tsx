@@ -42,7 +42,8 @@ const clientPortfolio = [
   {
     name: "Gestão de Contratação",
     url: "https://projeto-agencias-emprego.vercel.app/",
-    // logoSrc: "/assets/clientes/gestao-de-contratacao.png",
+    logoSrc: "/assets/clientes/gestao-de-contratacao.png",
+    logoAlt: "HR System — Gestão de Contratação",
   },
 ];
 
