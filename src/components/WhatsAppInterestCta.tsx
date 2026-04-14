@@ -30,12 +30,18 @@ export default function WhatsAppInterestCta({
   useEffect(() => {
     if (!open) return;
 
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
 
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
   }, [open]);
 
   const go = (href: string) => {
@@ -56,7 +62,7 @@ export default function WhatsAppInterestCta({
 
       {open ? (
         <div
-          className="fixed inset-0 z-50 flex items-end justify-center bg-black/80 p-4 backdrop-blur-md sm:items-center sm:p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black p-4 sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
@@ -65,7 +71,7 @@ export default function WhatsAppInterestCta({
           }}>
           <div
             ref={panelRef}
-            className="w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-deep shadow-[0_20px_80px_rgba(0,0,0,0.55)]">
+            className="w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-deep shadow-[0_20px_80px_rgba(0,0,0,0.75)]">
             <div className="flex items-start justify-between gap-4 border-b border-white/10 bg-white/5 px-5 py-4">
               <div>
                 <div id={titleId} className="text-base font-semibold">
