@@ -59,8 +59,7 @@ export default function Index() {
 
             <Reveal delayMs={140}>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-                Soluções digitais (sites e sistemas SaaS) e assistência técnica em celulares —
-                com design limpo, performance e experiência premium.
+                Soluções digitais inteligentes e manutenção técnica de confiança em um só lugar.
               </p>
             </Reveal>
 
