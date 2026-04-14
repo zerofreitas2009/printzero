@@ -24,7 +24,8 @@ const clientPortfolio = [
   {
     name: "LOHN Advocacia",
     url: "https://advocacialohn.adv.br/",
-    // logoSrc: "/assets/clientes/lohn-advocacia.png",
+    logoSrc: "/assets/clientes/lohn-advocacia.jpeg",
+    logoAlt: "LOHN Advocacia",
   },
   {
     name: "LocalDesk Sistema de Chamados",
