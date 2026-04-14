@@ -1,3 +1,13 @@
+import { Link } from "react-router-dom";
+
+const WHATSAPP_TECH = "https://wa.me/5511975495126?text=" +
+  encodeURIComponent(
+    "Olá! Vim pela página da PrintZero e quero saber mais sobre sites e sistemas (SaaS)."
+  );
+
+const WHATSAPP_ASSIST = "https://wa.me/5511993891011?text=" +
+  encodeURIComponent("Olá! Vim pela página da PrintZero e preciso de reparo/conserto.");
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-deep/50">
@@ -26,10 +36,22 @@ export default function Footer() {
               <div className="text-sm font-semibold">Sistemas / Sites</div>
               <div className="mt-2 text-sm text-white/70">
                 <div>
-                  WhatsApp: <span className="text-white">(11) 97549-5126</span>
+                  WhatsApp:{" "}
+                  <a
+                    href={WHATSAPP_TECH}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-white underline-offset-4 transition hover:underline">
+                    (11) 97549-5126
+                  </a>
                 </div>
                 <div>
-                  E-mail: <span className="text-white">zerofreitas2026@gmail.com</span>
+                  E-mail:{" "}
+                  <Link
+                    to="/contato?kind=orcamento#form"
+                    className="text-white underline-offset-4 transition hover:underline">
+                    zerofreitas2026@gmail.com
+                  </Link>
                 </div>
               </div>
             </div>
@@ -38,10 +60,22 @@ export default function Footer() {
               <div className="text-sm font-semibold">Conserto de Celulares</div>
               <div className="mt-2 text-sm text-white/70">
                 <div>
-                  WhatsApp: <span className="text-white">(11) 99389-1011</span>
+                  WhatsApp:{" "}
+                  <a
+                    href={WHATSAPP_ASSIST}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-white underline-offset-4 transition hover:underline">
+                    (11) 99389-1011
+                  </a>
                 </div>
                 <div>
-                  E-mail: <span className="text-white">printzeroinfo@gmail.com</span>
+                  E-mail:{" "}
+                  <Link
+                    to="/contato?kind=assistencia#form"
+                    className="text-white underline-offset-4 transition hover:underline">
+                    printzeroinfo@gmail.com
+                  </Link>
                 </div>
               </div>
             </div>

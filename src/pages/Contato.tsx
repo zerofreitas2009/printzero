@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import EmailContactForm from "../components/EmailContactForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -20,11 +20,29 @@ const WHATSAPP_SISTEMAS = `https://wa.me/${WHATSAPP_SISTEMAS_PHONE}?text=${encod
 type Kind = "orcamento" | "assistencia";
 
 export default function Contato() {
+  const location = useLocation();
   const [contactKind, setContactKind] = useState<Kind>("orcamento");
 
   useEffect(() => {
     document.title = "Contato | PrintZero";
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const kind = params.get("kind");
+    if (kind === "assistencia" || kind === "orcamento") {
+      setContactKind(kind);
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    if (!location.hash) return;
+    const id = location.hash.replace("#", "");
+    const el = document.getElementById(id);
+    if (!el) return;
+    // aguarda render antes de rolar
+    requestAnimationFrame(() => el.scrollIntoView({ behavior: "smooth", block: "start" }));
+  }, [location.hash]);
 
   const contact =
     contactKind === "assistencia"
@@ -175,14 +193,16 @@ export default function Contato() {
                 </div>
               </Reveal>
 
-              <Reveal delayMs={80}>
-                <EmailContactForm
-                  kind={contact.kind}
-                  title={contact.formTitle}
-                  phoneLabel={contact.phone}
-                  toEmailLabel={contact.email}
-                />
-              </Reveal>
+              <div id="form">
+                <Reveal delayMs={80}>
+                  <EmailContactForm
+                    kind={contact.kind}
+                    title={contact.formTitle}
+                    phoneLabel={contact.phone}
+                    toEmailLabel={contact.email}
+                  />
+                </Reveal>
+              </div>
             </div>
           </div>
         </section>
