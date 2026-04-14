@@ -529,49 +529,6 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ASSISTÊNCIA */}
-      <section id="assistencia" className="scroll-mt-24 py-16" aria-label="Assistência Técnica">
-        <div className="mx-auto max-w-6xl px-4">
-          <Reveal>
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-7 shadow-glow">
-              <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
-                <div>
-                  <div className="text-2xl font-semibold">Assistência Técnica de Celulares</div>
-                  <p className="mt-2 max-w-2xl text-sm text-white/70">
-                    Diagnóstico, troca de peças, reparos e otimizações. Atendimento ágil
-                    com transparência.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    to="/consertos-de-celular"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15">
-                    Ver serviços técnicos
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <a
-                    href={WHATSAPP_ASSISTENCIA}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() =>
-                      trackLeadEvent({
-                        event_type: "contact_click",
-                        contact_kind: "assistencia",
-                        contact_channel: "whatsapp",
-                      })
-                    }
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-royal to-sky-400 px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-95">
-                    Orçar no WhatsApp
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );
