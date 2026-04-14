@@ -30,7 +30,8 @@ const clientPortfolio = [
   {
     name: "LocalDesk Sistema de Chamados",
     url: "https://localdesk.buscalocal.net/",
-    // logoSrc: "/assets/clientes/localdesk.png",
+    logoSrc: "/assets/clientes/localdesk.png",
+    logoAlt: "LocalDesk — Gestão de Chamados",
   },
   {
     name: "BuscaLocal Sistemas de Buscas de Negócio",
