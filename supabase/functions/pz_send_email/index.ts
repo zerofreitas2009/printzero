@@ -71,7 +71,7 @@ serve(async (req) => {
     const to =
       kind === "assistencia"
         ? "printzeroinfo@gmail.com"
-        : "suporte@printzero.com.br";
+        : "contato@printzero.com.br";
 
     const label = kind === "assistencia" ? "Assistência Técnica" : "Orçamento";
 
