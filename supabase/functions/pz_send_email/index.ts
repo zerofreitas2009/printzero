@@ -22,6 +22,11 @@ function escapeHtml(value: unknown) {
     .replaceAll("'", "&#39;");
 }
 
+function isValidEmail(value: string) {
+  // simples o suficiente para validar remetente/headers (evita caracteres inválidos)
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -33,21 +38,24 @@ serve(async (req) => {
 
   try {
     const resendKey = Deno.env.get("RESEND_API_KEY");
-    const fromEmail = Deno.env.get("RESEND_FROM");
+    const fromEnv = (Deno.env.get("RESEND_FROM") ?? "").trim();
 
-    if (!resendKey || !fromEmail) {
+    if (!resendKey) {
       console.error("[pz_send_email] Missing secrets", {
         hasResendKey: Boolean(resendKey),
-        hasFromEmail: Boolean(fromEmail),
       });
       return json(
         {
-          error:
-            "Email não configurado. Configure os secrets RESEND_API_KEY e RESEND_FROM.",
+          error: "Email não configurado. Configure o secret RESEND_API_KEY.",
         },
         500,
       );
     }
+
+    // Remetente RFC 5322: "Nome" <email@dominio>
+    // Observação: "contato@app:printzero.com.br" não é um e-mail válido (":" não é permitido em domínio).
+    const fromAddress = isValidEmail(fromEnv) ? fromEnv : "contato@printzero.com.br";
+    const from = `"Contato - PrintZero" <${fromAddress}>`;
 
     const body = (await req.json()) as {
       name?: string;
@@ -69,7 +77,7 @@ serve(async (req) => {
       return json({ error: "Campos obrigatórios faltando." }, 400);
     }
 
-    // Restauro da lógica anterior (compatível com outros sites):
+    // Lógica compatível com outros sites:
     // - orcamento/sites -> printzeroinfo@gmail.com
     // - demais -> contato@printzero.com.br
     const toEmail =
@@ -120,7 +128,7 @@ serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: `PrintZero <${fromEmail}>`,
+        from,
         to: [toEmail],
         reply_to: email,
         subject: finalSubject,
