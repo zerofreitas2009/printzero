@@ -122,6 +122,8 @@ serve(async (req) => {
       },
     });
 
+    let sent = false;
+
     try {
       await client.send({
         // RFC 5322 format
@@ -132,8 +134,15 @@ serve(async (req) => {
         html,
         replyTo: email,
       });
+      sent = true;
     } finally {
-      await client.close();
+      try {
+        await client.close();
+      } catch (error) {
+        // Se o e-mail já foi enviado, não devemos falhar o request só por erro no close.
+        if (!sent) throw error;
+        console.error("[pz_send_email_printzero] close error", { error });
+      }
     }
 
     console.log("[pz_send_email_printzero] ok", { kind, to });
