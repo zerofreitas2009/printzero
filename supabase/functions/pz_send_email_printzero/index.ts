@@ -46,18 +46,16 @@ serve(async (req) => {
   try {
     const smtpUser = Deno.env.get("PZ_ZOHO_SMTP_USER");
     const smtpPass = Deno.env.get("PZ_ZOHO_SMTP_PASS");
-    const fromEmail = Deno.env.get("PZ_ZOHO_FROM") ?? smtpUser;
 
-    if (!smtpUser || !smtpPass || !fromEmail) {
+    if (!smtpUser || !smtpPass) {
       console.error("[pz_send_email_printzero] Missing secrets", {
         hasUser: Boolean(smtpUser),
         hasPass: Boolean(smtpPass),
-        hasFrom: Boolean(fromEmail),
       });
       return json(
         {
           error:
-            "Email não configurado. Configure os secrets PZ_ZOHO_SMTP_USER, PZ_ZOHO_SMTP_PASS e (opcional) PZ_ZOHO_FROM.",
+            "Email não configurado. Configure os secrets PZ_ZOHO_SMTP_USER e PZ_ZOHO_SMTP_PASS.",
         },
         500,
       );
@@ -80,14 +78,12 @@ serve(async (req) => {
       return json({ error: "Campos obrigatórios faltando" }, 400);
     }
 
-    const to =
-      kind === "assistencia" ? "printzeroinfo@gmail.com" : "contato@printzero.com.br";
-
-    const label = kind === "assistencia" ? "Assistência" : "Sistemas/Sites";
+    // Para este projeto, esta function é usada para Sistemas/Orçamento.
+    const to = "contato@printzero.com.br";
 
     const html = `
       <div style="font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:#0b1220;">
-        <h2 style="margin:0 0 12px 0;">Contato — ${escapeHtml(label)}</h2>
+        <h2 style="margin:0 0 12px 0;">Contato — Sistemas</h2>
         <p style="margin:0 0 16px 0; color:#334155;">Novo contato enviado pelo site PrintZero.</p>
         <table style="border-collapse:collapse; width:100%; max-width:680px;">
           <tr><td style="padding:8px 0; width:140px; color:#64748b;">Nome</td><td style="padding:8px 0;">${escapeHtml(name)}</td></tr>
@@ -103,7 +99,7 @@ serve(async (req) => {
     `;
 
     const text = [
-      `Contato — ${label}`,
+      `Contato — Sistemas`,
       ``,
       `Nome: ${name}`,
       `E-mail: ${email}`,
@@ -128,9 +124,10 @@ serve(async (req) => {
 
     try {
       await client.send({
-        from: fromEmail,
+        // RFC 5322 format
+        from: `"Contato - PrintZero" <${smtpUser}>`,
         to,
-        subject: `[PrintZero] ${label}: ${subject}`,
+        subject: `[PrintZero • Sistemas] ${subject}`,
         content: text,
         html,
         replyTo: email,

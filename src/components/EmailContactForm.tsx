@@ -94,7 +94,11 @@ export default function EmailContactForm({
     setLoading(true);
     setSent(null);
 
-    const { error } = await supabase.functions.invoke("pz_send_email", {
+    // Sem mexer no Resend: para "Sistemas" usamos Zoho SMTP (function específica do PrintZero).
+    // Para "Assistência" mantemos o fluxo atual (compatível com Gmail).
+    const functionName = kind === "assistencia" ? "pz_send_email" : "pz_send_email_printzero";
+
+    const { error } = await supabase.functions.invoke(functionName, {
       body: {
         kind,
         name,
@@ -223,25 +227,25 @@ export default function EmailContactForm({
         <button
           type="submit"
           disabled={!canSubmit}
-          className="mt-1 inline-flex h-12 items-center justify-center rounded-xl bg-gradient-to-r from-royal to-sky-400 px-6 text-sm font-semibold text-white shadow-glow transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-50">
-          {loading ? "Enviando..." : "Enviar mensagem"}
+          className={
+            canSubmit
+              ? "inline-flex h-12 items-center justify-center rounded-full bg-gradient-to-r from-royal to-sky-400 px-6 text-sm font-semibold text-white shadow-glow transition hover:opacity-95"
+              : "inline-flex h-12 items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 text-sm font-semibold text-white/50"
+          }>
+          {loading ? "Enviando..." : "Enviar"}
         </button>
 
         {sent === "ok" ? (
-          <div className="rounded-xl border border-emerald-400/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-200">
-            Mensagem enviada com sucesso. Em breve entraremos em contato.
+          <div className="rounded-xl border border-emerald-400/20 bg-emerald-500/10 p-4 text-sm text-emerald-100">
+            Mensagem enviada com sucesso.
           </div>
         ) : null}
 
         {sent === "error" ? (
-          <div className="rounded-xl border border-rose-400/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
-            Não foi possível enviar agora. Tente novamente ou chame no WhatsApp.
+          <div className="rounded-xl border border-rose-400/20 bg-rose-500/10 p-4 text-sm text-rose-100">
+            Não foi possível enviar agora. Tente novamente em instantes.
           </div>
         ) : null}
-
-        <div className="text-xs text-white/50">
-          Ao enviar, você concorda em ser contatado(a) pela PrintZero.
-        </div>
       </form>
     </div>
   );
