@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const WHATSAPP_TECH = "https://wa.me/5511975495126?text=" +
+const WHATSAPP_TECH = "https://wa.me/5511978711907?text=" +
   encodeURIComponent(
     "Olá! Vim pela página da PrintZero e quero saber mais sobre sites e sistemas (SaaS)."
   );
@@ -42,7 +42,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noreferrer"
                     className="text-white underline-offset-4 transition hover:underline">
-                    (11) 97549-5126
+                    (11) 97871-1907
                   </a>
                 </div>
                 <div>

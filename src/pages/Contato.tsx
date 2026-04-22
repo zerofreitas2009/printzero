@@ -8,7 +8,7 @@ import Reveal from "../components/Reveal";
 import WhatsAppFab from "../components/WhatsAppFab";
 import { trackLeadEvent } from "../lib/pzLeadTracking";
 
-const WHATSAPP_SISTEMAS_PHONE = "5511975495126";
+const WHATSAPP_SISTEMAS_PHONE = "5511978711907";
 const WHATSAPP_ASSISTENCIA = "https://wa.me/5511993891011";
 
 const WHATSAPP_SISTEMAS_TEXT =
@@ -61,7 +61,7 @@ export default function Contato() {
           headline: "Contato — Sistemas e Sites",
           description:
             "Para orçamento de desenvolvimento (sites/sistemas) ou para adquirir o sistema de chamados LocalDesk.",
-          phone: "(11) 97549-5126",
+          phone: "(11) 97871-1907",
           whatsapp: WHATSAPP_SISTEMAS,
           email: "zerofreitas2026@gmail.com",
           formTitle: "Enviar e-mail — Sistemas (Sites / SaaS / LocalDesk)",

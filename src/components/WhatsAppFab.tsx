@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function WhatsAppFab({
-  phone = "5511975495126",
+  phone = "5511978711907",
   text =
     "Olá! Vim pela página da PrintZero e quero contratar serviços de informática (site/sistema).",
   className,

@@ -9,7 +9,7 @@ import WhatsAppFab from "../components/WhatsAppFab";
 import WhatsAppInterestCta from "../components/WhatsAppInterestCta";
 import PortfolioCarousel from "../components/PortfolioCarousel";
 
-const WHATSAPP = "https://wa.me/5511975495126";
+const WHATSAPP = "https://wa.me/5511978711907";
 const WHATSAPP_ASSISTENCIA = "https://wa.me/5511993891011";
 
 const saasExamples = ["Pet Shop", "Comércio", "Indústria", "Financeiro", "HelpDesk"];
@@ -272,9 +272,10 @@ export default function Index() {
                   <div className="h-px w-full bg-gradient-to-r from-white/0 via-white/15 to-white/0" />
 
                   <a
-                    href={`https://wa.me/5511975495126?text=${encodeURIComponent(
+                    href={`https://wa.me/5511978711907?text=${encodeURIComponent(
                       "Olá! Quero saber mais sobre sites e sistemas (SaaS). Pode me ajudar?"
                     )}`}
+
                     target="_blank"
                     rel="noreferrer"
                     onClick={() =>

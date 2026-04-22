@@ -5,7 +5,7 @@ import { trackLeadEvent } from "../lib/pzLeadTracking";
 
 type NavItem = { label: string; href: string };
 
-const WHATSAPP_SISTEMAS_PHONE = "5511975495126";
+const WHATSAPP_SISTEMAS_PHONE = "5511978711907";
 const WHATSAPP_SISTEMAS_TEXT =
   "Olá! Vim pela página da PrintZero e quero contratar serviços de informática (site/sistema).";
 const WHATSAPP_SISTEMAS_HREF = `https://wa.me/${WHATSAPP_SISTEMAS_PHONE}?text=${encodeURIComponent(
