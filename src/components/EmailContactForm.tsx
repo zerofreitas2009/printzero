@@ -94,7 +94,7 @@ export default function EmailContactForm({
     setLoading(true);
     setSent(null);
 
-    const { error } = await supabase.functions.invoke("pz_send_email", {
+    const { error } = await supabase.functions.invoke("pz_send_email_printzero", {
       body: {
         kind,
         name,
