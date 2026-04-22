@@ -24,6 +24,15 @@ function json(data: unknown, status = 200) {
   });
 }
 
+function escapeHtml(value: unknown) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -68,16 +77,15 @@ serve(async (req) => {
       return json({ error: "Campos obrigatórios faltando" }, 400);
     }
 
+    // Destinos
     const to =
-      kind === "assistencia"
-        ? "printzeroinfo@gmail.com"
-        : "contato@printzero.com.br";
+      kind === "assistencia" ? "printzeroinfo@gmail.com" : "contato@printzero.com.br";
 
-    const label = kind === "assistencia" ? "Assistência Técnica" : "Orçamento";
+    const label = kind === "assistencia" ? "Assistência" : "Sistemas/Sites";
 
     const html = `
       <div style="font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:#0b1220;">
-        <h2 style="margin:0 0 12px 0;">Contato — ${label}</h2>
+        <h2 style="margin:0 0 12px 0;">Contato — ${escapeHtml(label)}</h2>
         <p style="margin:0 0 16px 0; color:#334155;">Novo contato enviado pelo site PrintZero.</p>
         <table style="border-collapse:collapse; width:100%; max-width:680px;">
           <tr><td style="padding:8px 0; width:140px; color:#64748b;">Nome</td><td style="padding:8px 0;">${escapeHtml(name)}</td></tr>
@@ -92,6 +100,18 @@ serve(async (req) => {
       </div>
     `;
 
+    const text = [
+      `Contato — ${label}`,
+      ``,
+      `Nome: ${name}`,
+      `E-mail: ${email}`,
+      `Telefone: ${phone}`,
+      `Assunto: ${subject}`,
+      ``,
+      `Mensagem:`,
+      message,
+    ].join("\n");
+
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -99,10 +119,11 @@ serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: fromEmail,
+        from: `PrintZero <${fromEmail}>`,
         to: [to],
         subject: `[PrintZero] ${label}: ${subject}`,
         html,
+        text,
         reply_to: email,
       }),
     });
@@ -116,22 +137,10 @@ serve(async (req) => {
       return json({ error: "Falha ao enviar e-mail" }, 500);
     }
 
-    const data = await res.json();
-    console.log("[pz_send_email] Email sent", { kind, to, data });
-
+    console.log("[pz_send_email] ok", { kind, to });
     return json({ ok: true });
   } catch (error) {
     console.error("[pz_send_email] Unexpected error", { error });
     return json({ error: "Erro inesperado" }, 500);
   }
 });
-
-function escapeHtml(input: string) {
-  return input
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
