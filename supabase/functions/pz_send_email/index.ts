@@ -77,13 +77,10 @@ serve(async (req) => {
       return json({ error: "Campos obrigatórios faltando." }, 400);
     }
 
-    // Lógica compatível com outros sites:
-    // - orcamento/sites -> printzeroinfo@gmail.com
-    // - demais -> contato@printzero.com.br
-    const toEmail =
-      kind === "orcamento" || kind === "sites"
-        ? "printzeroinfo@gmail.com"
-        : "contato@printzero.com.br";
+    // Destinatário por área (PrintZero):
+    // - assistencia -> printzeroinfo@gmail.com
+    // - sistemas/sites (orcamento) -> contato@printzero.com.br
+    const toEmail = kind === "assistencia" ? "printzeroinfo@gmail.com" : "contato@printzero.com.br";
 
     const subjectMap: Record<string, string> = {
       suporte: "Suporte técnico - PrintZero",
