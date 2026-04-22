@@ -50,7 +50,7 @@ export default function Footer() {
                   <Link
                     to="/contato?kind=orcamento#form"
                     className="text-white underline-offset-4 transition hover:underline">
-                    zerofreitas2026@gmail.com
+                    suporte@printzero.com.br
                   </Link>
                 </div>
               </div>

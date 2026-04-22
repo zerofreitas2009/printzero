@@ -63,7 +63,7 @@ export default function Contato() {
             "Para orçamento de desenvolvimento (sites/sistemas) ou para adquirir o sistema de chamados LocalDesk.",
           phone: "(11) 97871-1907",
           whatsapp: WHATSAPP_SISTEMAS,
-          email: "zerofreitas2026@gmail.com",
+          email: "suporte@printzero.com.br",
           formTitle: "Enviar e-mail — Sistemas (Sites / SaaS / LocalDesk)",
         };
 

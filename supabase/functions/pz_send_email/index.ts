@@ -35,7 +35,7 @@ serve(async (req) => {
 
   try {
     const resendKey = Deno.env.get("RESEND_API_KEY");
-    const fromEmail = Deno.env.get("PRINTZERO_FROM_EMAIL");
+    const fromEmail = Deno.env.get("RESEND_FROM");
 
     if (!resendKey || !fromEmail) {
       console.error("[pz_send_email] Missing secrets", {
@@ -45,7 +45,7 @@ serve(async (req) => {
       return json(
         {
           error:
-            "Email não configurado. Configure os secrets RESEND_API_KEY e PRINTZERO_FROM_EMAIL.",
+            "Email não configurado. Configure os secrets RESEND_API_KEY e RESEND_FROM.",
         },
         500,
       );
@@ -71,7 +71,7 @@ serve(async (req) => {
     const to =
       kind === "assistencia"
         ? "printzeroinfo@gmail.com"
-        : "zerofreitas2026@gmail.com";
+        : "suporte@printzero.com.br";
 
     const label = kind === "assistencia" ? "Assistência Técnica" : "Orçamento";
 
