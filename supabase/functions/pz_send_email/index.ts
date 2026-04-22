@@ -82,15 +82,19 @@ serve(async (req) => {
     // - sistemas/sites (orcamento) -> contato@printzero.com.br
     const toEmail = kind === "assistencia" ? "printzeroinfo@gmail.com" : "contato@printzero.com.br";
 
+    const channelLabel = kind === "assistencia" ? "Assistência" : "Sistemas";
+
     const subjectMap: Record<string, string> = {
-      suporte: "Suporte técnico - PrintZero",
-      sites: "Orçamento - Sistemas e Sites - PrintZero",
-      orcamento: "Orçamento - PrintZero",
+      suporte: "Suporte técnico",
+      sites: "Orçamento - Sistemas e Sites",
+      orcamento: "Orçamento - Sistemas",
+      assistencia: "Assistência Técnica",
     };
 
+    const baseSubject = subjectMap[kind] ?? "Contato";
     const finalSubject = subject
-      ? `[PrintZero] ${subject}`
-      : subjectMap[kind] ?? "Mensagem - PrintZero";
+      ? `[PrintZero • ${channelLabel}] ${subject}`
+      : `[PrintZero • ${channelLabel}] ${baseSubject}`;
 
     const emailHtml = `
       <h2>Nova mensagem do site</h2>
