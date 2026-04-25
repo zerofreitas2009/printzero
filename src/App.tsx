@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import ConsertosDeCelular from "./pages/ConsertosDeCelular";
 import Contato from "./pages/Contato";
@@ -29,17 +29,26 @@ function getOrCreateSessionId() {
   return id;
 }
 
-function PageviewTracker() {
+function hasTrackedSession(sessionId: string) {
+  return localStorage.getItem("pz_session_tracked") === sessionId;
+}
+
+function markTrackedSession(sessionId: string) {
+  localStorage.setItem("pz_session_tracked", sessionId);
+}
+
+function SessionAccessTracker() {
   const location = useLocation();
-  const lastPathRef = useRef<string>("");
 
   useEffect(() => {
-    const path = `${location.pathname}${location.search}${location.hash}`;
-    if (lastPathRef.current === path) return;
-    lastPathRef.current = path;
-
     const session_id = getOrCreateSessionId();
+    if (hasTrackedSession(session_id)) return;
+
+    // Registra apenas 1 vez por sessão (primeira página visitada).
+    const path = `${location.pathname}${location.search}${location.hash}`;
     const referrer = document.referrer || undefined;
+
+    markTrackedSession(session_id);
 
     // Fire-and-forget: não bloqueia navegação.
     supabase.functions.invoke("pz_track_pageview", {
@@ -58,7 +67,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
-      <PageviewTracker />
+      <SessionAccessTracker />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/contato" element={<Contato />} />

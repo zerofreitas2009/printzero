@@ -27,6 +27,27 @@ function trimOrNull(v: unknown, maxLen: number) {
   return t.length > maxLen ? t.slice(0, maxLen) : t;
 }
 
+function getClientIp(req: Request) {
+  const cfIp = req.headers.get("cf-connecting-ip");
+  if (cfIp) return cfIp;
+
+  const xff = req.headers.get("x-forwarded-for");
+  if (xff) return xff.split(",")[0]?.trim() || null;
+
+  const xRealIp = req.headers.get("x-real-ip");
+  if (xRealIp) return xRealIp;
+
+  return null;
+}
+
+function getCountry(req: Request) {
+  return (
+    req.headers.get("cf-ipcountry") ||
+    req.headers.get("x-vercel-ip-country") ||
+    null
+  );
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -55,19 +76,34 @@ serve(async (req) => {
 
     const referrer = trimOrNull(body.referrer, 800);
     const sessionId = trimOrNull(body.session_id, 120);
-    const userAgent = (req.headers.get("user-agent") ?? "").slice(0, 1000) || null;
+
+    // Como agora queremos 1 registro por sessão, o session_id é obrigatório.
+    if (!sessionId) return json({ error: "session_id inválido" }, 400);
+
+    const userAgent =
+      (req.headers.get("user-agent") ?? "").slice(0, 1000) || null;
+    const ip = getClientIp(req);
+    const ipCountry = getCountry(req);
 
     const supabase = createClient(url, serviceRoleKey);
 
-    const { error } = await supabase.from("pz_pageviews").insert({
-      path,
-      referrer,
-      session_id: sessionId,
-      user_agent: userAgent,
-    });
+    const { error } = await supabase.from("pz_pageviews").upsert(
+      {
+        path,
+        referrer,
+        session_id: sessionId,
+        user_agent: userAgent,
+        ip,
+        ip_country: ipCountry,
+      },
+      {
+        onConflict: "session_id",
+        ignoreDuplicates: true,
+      }
+    );
 
     if (error) {
-      console.error("[pz_track_pageview] Insert error", { error });
+      console.error("[pz_track_pageview] Upsert error", { error });
       return json({ error: "Insert failed" }, 500);
     }
 
