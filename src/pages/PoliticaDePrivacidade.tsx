@@ -60,7 +60,7 @@ export default function PoliticaDePrivacidade() {
                   <h2>Contato</h2>
                   <p>
                     Em caso de dúvidas sobre esta Política de Privacidade, entre em
-                    contato pelo e-mail: <a href="mailto:zerofreitas2009@gmail.com">zerofreitas2009@gmail.com</a>.
+                    contato pelo e-mail: <a href="mailto:contato@printzero.com.br">contato@printzero.com.br</a>.
                   </p>
                 </div>
               </div>
