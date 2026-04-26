@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import Index from "./pages/Index";
 import ConsertosDeCelular from "./pages/ConsertosDeCelular";
 import Contato from "./pages/Contato";
+import PoliticaDePrivacidade from "./pages/PoliticaDePrivacidade";
+import TermosDeUso from "./pages/TermosDeUso";
 import { supabase } from "./integrations/supabase/client";
 
 function ScrollToTop() {
@@ -72,6 +74,11 @@ export default function App() {
         <Route path="/" element={<Index />} />
         <Route path="/contato" element={<Contato />} />
         <Route path="/consertos-de-celular" element={<ConsertosDeCelular />} />
+        <Route
+          path="/politica-de-privacidade"
+          element={<PoliticaDePrivacidade />}
+        />
+        <Route path="/termos-de-uso" element={<TermosDeUso />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
